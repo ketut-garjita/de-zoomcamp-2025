@@ -119,3 +119,5 @@ Attaching to pgadmin, postgres
 [http://localhost:8080](http://localhost:8080)
 
 <img width="527" alt="image" src="https://github.com/user-attachments/assets/fd8ea6d7-4781-46a5-9049-a4c98e4cf2d1" />
+
+### Anser 2: postgres:5432
