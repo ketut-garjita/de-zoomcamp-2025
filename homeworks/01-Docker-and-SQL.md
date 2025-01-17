@@ -370,7 +370,7 @@ dropoff_zone | largest_tip
 
 ```
 
-## Answer 6: JFK Airport
+### Answer 6: JFK Airport
 
 
 ## Terraform
