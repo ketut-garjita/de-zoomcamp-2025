@@ -1,6 +1,6 @@
-# de-zoomcamp-2025
+# Data Engineering Zoomcamp - 2025
 
-## CONTENTS
+## Contents
 
 ### Module 1 : Docker & Terraform 
 - [Source](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform)
