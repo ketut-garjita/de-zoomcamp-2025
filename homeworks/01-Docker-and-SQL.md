@@ -280,6 +280,7 @@ Tip: For every day, we only care about one single trip with the longest distance
 
 ### Solution
 
+```
 SELECT
     DATE(lpep_pickup_datetime) AS pickup_date,
     MAX(trip_distance) AS longest_trip_distance
@@ -292,6 +293,7 @@ LIMIT 1;
  pickup_date | longest_trip_distance 
 -------------+-----------------------
  2019-10-31  |                515.89
+```
 
 ### Answer 4: 2019-10-31
 
