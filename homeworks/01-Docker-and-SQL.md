@@ -117,6 +117,13 @@ volumes:
 Attaching to pgadmin, postgres
 ```
 
+```
+docker ps
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS          PORTS                                              NAMES
+8f880853f854   postgres:17-alpine      "docker-entrypoint.s…"   58 minutes ago   Up 58 minutes   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp          postgres
+f260162f864b   dpage/pgadmin4:latest   "/entrypoint.sh"         2 hours ago      Up 58 minutes   443/tcp, 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   pgadmin
+```
+
 [http://localhost:8080](http://localhost:8080)
 
 <img width="527" alt="image" src="https://github.com/user-attachments/assets/fd8ea6d7-4781-46a5-9049-a4c98e4cf2d1" />
