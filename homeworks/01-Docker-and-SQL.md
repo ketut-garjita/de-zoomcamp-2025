@@ -255,7 +255,7 @@ ny_taxi-# WHERE lpep_pickup_datetime >= '2019-10-01' AND lpep_pickup_datetime < 
        104830 |                198995 |                109642 |                  27686 |         35201
 (1 row)
 ```
-### Answer 3: 104,838; 199,013; 109,645; 27,688; 35,202 (nearest)
+### Answer 3: 104,838; 199,013; 109,645; 27,688; 35,202 (*nearest*)
 
 
 ## Question 4. Longest trip for each day
