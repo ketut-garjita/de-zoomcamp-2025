@@ -367,7 +367,6 @@ dropoff_zone | largest_tip
 --------------+-------------
  JFK Airport  |        87.3
 (1 row)
-
 ```
 
 ### Answer 6: JFK Airport
