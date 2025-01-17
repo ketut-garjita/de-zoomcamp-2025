@@ -32,6 +32,7 @@ docker run -it python:3.12.8 pip --version
 ```
 ### Answer 1: 24.3.1
 
+
 ## Question 2. Understanding Docker networking and docker-compose
 
 Given the following docker-compose.yaml, what is the hostname and port that pgadmin should use to connect to the postgres database?
@@ -121,6 +122,7 @@ Attaching to pgadmin, postgres
 <img width="527" alt="image" src="https://github.com/user-attachments/assets/fd8ea6d7-4781-46a5-9049-a4c98e4cf2d1" />
 
 ### Answer 2: postgres:5432
+
 
 ## Prepare Postgres
 
