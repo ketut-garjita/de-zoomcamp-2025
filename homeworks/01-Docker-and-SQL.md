@@ -387,3 +387,17 @@ Answers:
 - terraform import, terraform apply -y, terraform rm
 
 ### Answer 7: terraform init, terraform apply -auto-approve, terraform destroy
+
+### Explanation
+
+1. Downloading the provider plugins and setting up backend:
+
+    - **terraform init**: This initializes the Terraform working directory by downloading provider plugins and configuring the backend.
+
+2. Generating proposed changes and auto-executing the plan:
+
+    - **terraform apply** -auto-approve: This generates the execution plan and automatically applies the changes without requiring manual confirmation.
+
+3. Remove all resources managed by Terraform:
+
+    - **terraform destroy**: This command deletes all the resources that Terraform manages, cleaning up the infrastructure.
