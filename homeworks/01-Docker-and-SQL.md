@@ -407,7 +407,7 @@ Answers:
 
 ### Solution:
 
-
+```
 $ **terraform init**
 Initializing the backend...
 Initializing provider plugins...
@@ -647,6 +647,7 @@ google_storage_bucket.demo-bucket: Destruction complete after 2s
 google_bigquery_dataset.de2025: Destruction complete after 4s
 
 Destroy complete! Resources: 2 destroyed.
+```
 
 ### Answer 7: terraform init, terraform apply -auto-approve, terraform destroy
 
