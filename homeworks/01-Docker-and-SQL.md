@@ -34,6 +34,7 @@ docker run -it python:3.12.8 pip --version
 ```
 ### Answer 1: 24.3.1
 
+---
 
 ## Question 2. Understanding Docker networking and docker-compose
 
@@ -132,6 +133,7 @@ f260162f864b   dpage/pgadmin4:latest   "/entrypoint.sh"         2 hours ago     
 
 ### Answer 2: postgres:5432
 
+---
 
 ## Prepare Postgres
 
@@ -146,6 +148,8 @@ wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_z
 Download this data and put it into Postgres.
 
 You can use the code from the course. It's up to you whether you want to use Jupyter or a python script.
+
+---
 
 ## Question 3. Trip Segmentation Count
 
@@ -203,8 +207,8 @@ gunzip green_tripdata_2019-10.csv.gz
 
 a. Copy Data Files into Postgres Container
 
-docker cp green_tripdata_2019-10.csv postgres-taxi:/var/lib/postgresql/data/green_tripdata_2019-10.csv
-docker cp taxi_zone_lookup.csv postgres-taxi:/var/lib/postgresql/data/taxi_zone_lookup.csv
+docker cp green_tripdata_2019-10.csv postgres:/var/lib/postgresql/data/green_tripdata_2019-10.csv
+docker cp taxi_zone_lookup.csv postgres:/var/lib/postgresql/data/taxi_zone_lookup.csv
 
 b. Access the Postgres Container
 
@@ -251,13 +255,13 @@ COPY taxi_zones FROM '/var/lib/postgresql/data/taxi_zone_lookup.csv' DELIMITER '
 4. Query Trip Segmentation Counts
 
 ny_taxi=# SELECT
-ny_taxi-#     SUM(CASE WHEN trip_distance <= 1 THEN 1 ELSE 0 END) AS up_to_1_mile,
-ny_taxi-#     SUM(CASE WHEN trip_distance > 1 AND trip_distance <= 3 THEN 1 ELSE 0 END) AS between_1_and_3_miles,
-ny_taxi-#     SUM(CASE WHEN trip_distance > 3 AND trip_distance <= 7 THEN 1 ELSE 0 END) AS between_3_and_7_miles,
-ny_taxi-#     SUM(CASE WHEN trip_distance > 7 AND trip_distance <= 10 THEN 1 ELSE 0 END) AS between_7_and_10_miles,
-ny_taxi-#     SUM(CASE WHEN trip_distance > 10 THEN 1 ELSE 0 END) AS over_10_miles
-ny_taxi-# FROM green_tripdata
-ny_taxi-# WHERE lpep_pickup_datetime >= '2019-10-01' AND lpep_pickup_datetime < '2019-11-01';
+    SUM(CASE WHEN trip_distance <= 1 THEN 1 ELSE 0 END) AS up_to_1_mile,
+    SUM(CASE WHEN trip_distance > 1 AND trip_distance <= 3 THEN 1 ELSE 0 END) AS between_1_and_3_miles,
+    SUM(CASE WHEN trip_distance > 3 AND trip_distance <= 7 THEN 1 ELSE 0 END) AS between_3_and_7_miles,
+    SUM(CASE WHEN trip_distance > 7 AND trip_distance <= 10 THEN 1 ELSE 0 END) AS between_7_and_10_miles,
+    SUM(CASE WHEN trip_distance > 10 THEN 1 ELSE 0 END) AS over_10_miles
+FROM green_tripdata
+WHERE lpep_pickup_datetime >= '2019-10-01' AND lpep_pickup_datetime < '2019-11-01';
  up_to_1_mile | between_1_and_3_miles | between_3_and_7_miles | between_7_and_10_miles | over_10_miles 
 --------------+-----------------------+-----------------------+------------------------+---------------
        104830 |                198995 |                109642 |                  27686 |         35201
@@ -265,6 +269,7 @@ ny_taxi-# WHERE lpep_pickup_datetime >= '2019-10-01' AND lpep_pickup_datetime < 
 ```
 ### Answer 3: 104,838; 199,013; 109,645; 27,688; 35,202 (*closest*)
 
+---
 
 ## Question 4. Longest trip for each day
 
@@ -296,6 +301,7 @@ LIMIT 1;
 
 ### Answer 4: 2019-10-31
 
+---
 
 ## Question 5. Three biggest pickup zones
 
@@ -331,6 +337,7 @@ ORDER BY total_amount DESC;
 
 ### Answer 5: East Harlem North, East Harlem South, Morningside Heights
 
+---
 
 ## Question 6. Largest tip
 
@@ -370,6 +377,7 @@ dropoff_zone | largest_tip
 
 ### Answer 6: JFK Airport
 
+---
 
 ## Terraform
 
@@ -378,6 +386,8 @@ In this section homework we'll prepare the environment by creating resources in 
 In your VM on GCP/Laptop/GitHub Codespace install Terraform. Copy the files from the course repo here to your VM/Laptop/GitHub Codespace.
 
 Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
+
+---
 
 ## Question 7. Terraform Workflow
 
@@ -397,7 +407,8 @@ Answers:
 
 ### Solotion:
 
-$ terraform init
+
+$ **terraform init**
 Initializing the backend...
 Initializing provider plugins...
 - Finding latest version of hashicorp/google...
@@ -418,7 +429,7 @@ If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 
-$ terraform apply
+$ **terraform apply**
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
 following symbols:
@@ -509,7 +520,7 @@ google_storage_bucket.demo-bucket: Creation complete after 3s [id=de2025-id-1]
 
 Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 
-$ terraform destroy
+$ **terraform destroy**
 google_storage_bucket.demo-bucket: Refreshing state... [id=de2025-id-1]
 google_bigquery_dataset.de2025: Refreshing state... [id=projects/de-zoomcamp-2025--id/datasets/de2025]
 
