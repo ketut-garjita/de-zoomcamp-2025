@@ -408,7 +408,7 @@ Answers:
 ### Solution
 
 ```
-$ **terraform init**
+$ terraform init
 Initializing the backend...
 Initializing provider plugins...
 - Finding latest version of hashicorp/google...
@@ -429,7 +429,7 @@ If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 
-$ **terraform apply**
+$ terraform apply
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
 following symbols:
@@ -520,7 +520,7 @@ google_storage_bucket.demo-bucket: Creation complete after 3s [id=de2025-id-1]
 
 Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 
-$ **terraform destroy**
+$ terraform destroy
 google_storage_bucket.demo-bucket: Refreshing state... [id=de2025-id-1]
 google_bigquery_dataset.de2025: Refreshing state... [id=projects/de-zoomcamp-2025--id/datasets/de2025]
 
