@@ -80,7 +80,7 @@ volumes:
 ### Solution
 
 ```
-(projects) hduser@worker01:~/zoomcamp/de-2025$ docker compose up 
+$ docker compose up 
 [+] Running 28/28
  ✔ pgadmin Pulled                                                                                                                   80.1s 
    ✔ 38a8310d387e Pull complete                                                                                                      3.7s 
@@ -175,7 +175,7 @@ Answers:
 1. Run Postgres in Docker
 
 docker run -d \
-  --name postgres-taxi \
+  --name postgres \
   -e POSTGRES_USER=postgres \
   -e POSTGRES_PASSWORD=postgres \
   -e POSTGRES_DB=ny_taxi \
@@ -186,9 +186,9 @@ docker run -d \
   
 docker start pgadmin 
 pgadmin
-(projects) hduser@worker01:~/zoomcamp/de-2025$ docker ps
+$ docker ps
 CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS          PORTS                                              NAMES
-8f880853f854   postgres:17-alpine      "docker-entrypoint.s…"   31 seconds ago   Up 30 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp          postgres-taxi
+8f880853f854   postgres:17-alpine      "docker-entrypoint.s…"   31 seconds ago   Up 30 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp          postgres
 f260162f864b   dpage/pgadmin4:latest   "/entrypoint.sh"         37 minutes ago   Up 2 seconds    443/tcp, 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   pgadmin
 
 
@@ -208,8 +208,7 @@ docker cp taxi_zone_lookup.csv postgres-taxi:/var/lib/postgresql/data/taxi_zone_
 
 b. Access the Postgres Container
 
-docker exec -it postgres-taxi psql -U postgres -d ny_taxi
-docker exec -it postgres-taxi psql -U postgres -d ny_taxi
+docker exec -it postgres psql -U postgres -d ny_taxi
 
 c. Create Tables
 
