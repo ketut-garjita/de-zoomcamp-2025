@@ -276,8 +276,7 @@ SELECT
  up_to_1_mile | between_1_and_3_miles | between_3_and_7_miles | between_7_and_10_miles | over_10_miles 
 --------------+-----------------------+-----------------------+------------------------+---------------
        104830 |                198995 |                109642 |                  27686 |         35201
-(1 row)
- 
+(1 row) 
 ```
 
 ### Answer 3: 
@@ -309,8 +308,7 @@ ORDER BY longest_trip_distance DESC
 LIMIT 1;
  pickup_date | longest_trip_distance 
 -------------+-----------------------
- 2019-10-31  |                515.89
- 
+ 2019-10-31  |                515.89 
 ```
 
 ### Answer 4: 
@@ -346,8 +344,7 @@ ORDER BY total_amount DESC;
  East Harlem North   |   18686.6800000001
  East Harlem South   | 16797.260000000068
  Morningside Heights | 13029.790000000028
-(3 rows)
- 
+(3 rows) 
 ```
 
 ### Answer 5: 
@@ -387,8 +384,7 @@ LIMIT 1;
 dropoff_zone | largest_tip 
 --------------+-------------
  JFK Airport  |        87.3
-(1 row)
- 
+(1 row) 
 ```
 
 ### Answer 6: 
@@ -650,7 +646,6 @@ google_storage_bucket.zoomcamp-bucket: Destruction complete after 1s
 google_bigquery_dataset.de2025: Destruction complete after 3s
 
 Destroy complete! Resources: 2 destroyed.
-
 ```
 
 ### Answer 7: 
