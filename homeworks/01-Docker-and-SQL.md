@@ -197,9 +197,8 @@ Answers:
 ```
 1. Download the Data
 wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz
-wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_zone_lookup.csv
-
 gunzip green_tripdata_2019-10.csv.gz
+wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_zone_lookup.csv
 
 
 2. Load Data into Postgres
@@ -209,16 +208,23 @@ a. Copy Data Files into Postgres Container
 docker cp green_tripdata_2019-10.csv postgres:/var/lib/postgresql/data/green_tripdata_2019-10.csv
 docker cp taxi_zone_lookup.csv postgres:/var/lib/postgresql/data/taxi_zone_lookup.csv
 
+
 b. Login to postgres using pgcli
 
 pgcli -h localhost -p 5432 -U postgres -d postgres --password
   
+
 c. Create database ny_taxi
 
 create database ny_taxi;
+
+
+d. Conenct to database ny_taxi
+
 \c ny_taxi
 
-d. Create Tables
+
+e. Create Tables
 
 CREATE TABLE green_tripdata (
     vendorid INTEGER,
@@ -250,7 +256,8 @@ CREATE TABLE taxi_zones (
     service_zone TEXT
 );
 
-e. Load Data into Tables
+
+f. Load Data into Tables
 
 COPY green_tripdata FROM '/var/lib/postgresql/data/green_tripdata_2019-10.csv' DELIMITER ',' CSV HEADER;
 COPY taxi_zones FROM '/var/lib/postgresql/data/taxi_zone_lookup.csv' DELIMITER ',' CSV HEADER;
@@ -270,6 +277,7 @@ SELECT
 --------------+-----------------------+-----------------------+------------------------+---------------
        104830 |                198995 |                109642 |                  27686 |         35201
 (1 row)
+ 
 ```
 
 ### Answer 3: 
@@ -302,6 +310,7 @@ LIMIT 1;
  pickup_date | longest_trip_distance 
 -------------+-----------------------
  2019-10-31  |                515.89
+ 
 ```
 
 ### Answer 4: 
@@ -338,6 +347,7 @@ ORDER BY total_amount DESC;
  East Harlem South   | 16797.260000000068
  Morningside Heights | 13029.790000000028
 (3 rows)
+ 
 ```
 
 ### Answer 5: 
@@ -378,6 +388,7 @@ dropoff_zone | largest_tip
 --------------+-------------
  JFK Airport  |        87.3
 (1 row)
+ 
 ```
 
 ### Answer 6: 
