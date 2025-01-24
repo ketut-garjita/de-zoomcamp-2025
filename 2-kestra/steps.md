@@ -61,7 +61,9 @@ docker compose up -d
   ```
   df -h
   ```
-  ![image](https://github.com/user-attachments/assets/a0e8cecc-7ee0-455c-af1d-c0a54e71ccb7)
+
+  ![image](https://github.com/user-attachments/assets/0ff7970f-27e2-4ddd-9ff8-c56d6d489747)
+
 
   
 
