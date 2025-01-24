@@ -1,8 +1,9 @@
-1. terraform init
+### terraform init
 
-2. terraform apply -auto-approve
+### terraform apply -auto-approve
 
-3. terraform destroy
+### terraform destroy
+
 
 
 - terraform init
