@@ -55,4 +55,13 @@ docker compose up -d
   --TRUNCATE TABLE YELLOW_TRIPDATA;
   
   ```
+
+- Check disk utilization
+
+  ```
+  df -h
+  ```
+  ![image](https://github.com/user-attachments/assets/a0e8cecc-7ee0-455c-af1d-c0a54e71ccb7)
+
   
+
