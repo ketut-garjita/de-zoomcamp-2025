@@ -1,4 +1,5 @@
-Prerequisites:
+## Prerequisites
+
 - Install docker
   ```
   1. Update Your Package Index
@@ -49,12 +50,14 @@ Prerequisites:
   - wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_zone_lookup.csv
   
   
-Execute:
+## Executing
+
 - docker pull python:3.12.8
 - docker run -it python:3.12.8 pip --version
 - docker compose up -d
 - docker ps
 - Login to postgres using pgcli
+  
   ```
   pgcli -h localhost -p 5432 -U postgres -d postgres --password
   create database ny_taxi;
