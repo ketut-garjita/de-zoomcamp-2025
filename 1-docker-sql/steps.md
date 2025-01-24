@@ -65,7 +65,11 @@
 
   You are now connected to database "ny_taxi" as user "postgres"
   postgres@localhost:ny_taxi>
-  
+  ```
+
+- Create tables
+
+  ```
   CREATE TABLE green_tripdata (
      vendorid INTEGER,
      lpep_pickup_datetime TIMESTAMP,
