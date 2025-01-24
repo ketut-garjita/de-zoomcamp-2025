@@ -116,14 +116,16 @@ Execute:
      SUM(CASE WHEN trip_distance > 10 THEN 1 ELSE 0 END) AS over_10_miles
   FROM green_tripdata
   WHERE lpep_pickup_datetime >= '2019-10-01' AND lpep_pickup_datetime < '2019-11-01';
-  ```
+  
     up_to_1_mile | between_1_and_3_miles | between_3_and_7_miles | between_7_and_10_miles | over_10_miles 
     --------------+-----------------------+-----------------------+------------------------+---------------
          104830 |                198995 |                109642 |                  27686 |         35201
   (1 row)
-
+   
+  ```
 
 - Longest trip for each day
+  
   ```
   SELECT
     DATE(lpep_pickup_datetime) AS pickup_date,
@@ -134,13 +136,15 @@ Execute:
   GROUP BY pickup_date
   ORDER BY longest_trip_distance DESC
   LIMIT 1;   
-  ```
+  
      pickup_date | longest_trip_distance 
   -------------+-----------------------
    2019-10-31  |                515.89
 
+  ```
   
 - Three biggest pickup zones¶
+  
   ```
   SELECT 
     z.zone AS pickup_location,
@@ -151,7 +155,6 @@ Execute:
   GROUP BY pickup_location
   HAVING SUM(g.total_amount) > 13000
   ORDER BY total_amount DESC;
-  ```
   
      pickup_location   |    total_amount    
   ---------------------+--------------------
@@ -160,7 +163,10 @@ Execute:
    Morningside Heights | 13029.790000000028
   (3 rows)
 
+  ```
+
 - Largest tip
+  
   ```
   SELECT 
     dz.zone AS dropoff_zone,
@@ -175,13 +181,11 @@ Execute:
   GROUP BY dz.zone
   ORDER BY largest_tip DESC
   LIMIT 1;
-  ```
   
   dropoff_zone | largest_tip 
   --------------+-------------
    JFK Airport  |        87.3
   (1 row)
+
+  ```
   
-Prepare Postgres:
-- wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz
-- wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_zone_lookup.csv
