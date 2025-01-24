@@ -28,6 +28,7 @@ commands will detect it and remind you to do so if necessary.
 
 - terraform apply -auto-approve
 
+```
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   + create
 
