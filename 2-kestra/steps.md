@@ -27,3 +27,32 @@ docker compose up -d
 
   ![image](https://github.com/user-attachments/assets/a6ebf7d2-c113-405d-8e4a-94f3de4c9ffc)
 
+
+- Queries
+
+  ```
+  SELECT COUNT(*) FROM yellow_tripdata_staging;
+  SELECT COUNT(*) FROM yellow_tripdata;
+  SELECT * FROM yellow_tripdata WHERE 0=1;
+  SELECT COUNT(*) FROM yellow_tripdata
+  WHERE filename like 'yellow_tripdata_2020%';
+  SELECT COUNT(*) FROM yellow_tripdata
+  WHERE filename = 'yellow_tripdata_2021-03.csv';
+  SELECT COUNT(*) FROM yellow_tripdata
+  WHERE filename like 'yellow_tripdata_2019%';
+  
+  SELECT COUNT(*) FROM green_tripdata_staging;
+  SELECT COUNT(*) FROM green_tripdata;
+  SELECT * FROM green_tripdata WHERE 0=1;
+  SELECT COUNT(*) FROM green_tripdata
+  WHERE filename like 'green_tripdata_2020%';
+  SELECT COUNT(*) FROM green_tripdata
+  WHERE filename like 'green_tripdata_2019%';
+  
+  select * from green_tripdata;
+  
+  --TRUNCATE TABLE GREEN_TRIPDATA;
+  --TRUNCATE TABLE YELLOW_TRIPDATA;
+  
+  ```
+  
