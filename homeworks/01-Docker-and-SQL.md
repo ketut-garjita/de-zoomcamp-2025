@@ -122,7 +122,7 @@ volumes:
      ✔ Container pgadmin          Created                                                                                                2.3s 
      ✔ Container postgres         Created                                                                                                2.3s 
     Attaching to pgadmin, postgres
-     
+         
     ```
 
 - docker ps
@@ -131,7 +131,7 @@ volumes:
     docker ps
     CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS          PORTS                                              NAMES
     8f880853f854   postgres:17-alpine      "docker-entrypoint.s…"   58 minutes ago   Up 58 minutes   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp          postgres
-    f260162f864b   dpage/pgadmin4:latest   "/entrypoint.sh"         2 hours ago      Up 58 minutes   443/tcp, 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   pgadmin
+    f260162f864b   dpage/pgadmin4:latest   "/entrypoint.sh"         2 hours ago      Up 58 minutes   443/tcp, 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   pgadmin  
      
     ```
 
@@ -140,8 +140,7 @@ volumes:
     - Using  pgcli
 
         ```
-        pgcli -h localhost -p 5432 -U postgres -d postgres --password
-                 
+        pgcli -h localhost -p 5432 -U postgres -d postgres --password                 
         ```
 
       OR
