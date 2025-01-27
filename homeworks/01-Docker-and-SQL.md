@@ -127,18 +127,23 @@ volumes:
 - docker ps
   
     ```
-    docker ps
-    CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS          PORTS                                              NAMES
-    8f880853f854   postgres:17-alpine      "docker-entrypoint.s…"   58 minutes ago   Up 58 minutes   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp          postgres
-    f260162f864b   dpage/pgadmin4:latest   "/entrypoint.sh"         2 hours ago      Up 58 minutes   443/tcp, 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   pgadmin      
+    docker ps   
     ```
+    ![image.png](attachment:8e55efb6-8d79-47f9-aefd-25a6dbcf49d9.png)
 
+  
 - Check Connection
 
     - Using  pgcli
 
         ```
-        pgcli -h localhost -p 5432 -U postgres -d postgres --password                 
+        $ pgcli -h localhost -p 5433 -U postgres -d ny_taxi --password 
+            Password for postgres: 
+            Server: PostgreSQL 17.2
+            Version: 4.1.0
+            Home: http://pgcli.com
+            postgres@localhost:ny_taxi>
+              
         ```
 
       OR
@@ -200,28 +205,12 @@ wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_z
 
 2. Load Data into Postgres
 
-a. Copy Data Files into Postgres Container
+a. Login to postgres using pgcli
 
-docker cp green_tripdata_2019-10.csv postgres:/var/lib/postgresql/data/green_tripdata_2019-10.csv
-docker cp taxi_zone_lookup.csv postgres:/var/lib/postgresql/data/taxi_zone_lookup.csv
-
-
-b. Login to postgres using pgcli
-
-pgcli -h localhost -p 5432 -U postgres -d postgres --password
+pgcli -h localhost -p 5433 -U postgres -d ny_taxi --password
   
 
-c. Create database ny_taxi
-
-create database ny_taxi;
-
-
-d. Conenct to database ny_taxi
-
-\c ny_taxi
-
-
-e. Create Tables
+b. Create Tables
 
 CREATE TABLE green_tripdata (
     vendorid INTEGER,
@@ -254,7 +243,7 @@ CREATE TABLE taxi_zones (
 );
 
 
-f. Load Data into Tables
+c. Load Data into Tables
 
 COPY green_tripdata FROM '/var/lib/postgresql/data/green_tripdata_2019-10.csv' DELIMITER ',' CSV HEADER;
 COPY taxi_zones FROM '/var/lib/postgresql/data/taxi_zone_lookup.csv' DELIMITER ',' CSV HEADER;
@@ -276,6 +265,7 @@ up_to_1_mile | between_1_and_3_miles | between_3_and_7_miles | between_7_and_10_
        104830 |                198995 |                109642 |                  27686 |         35201
 (1 row) 
 ```
+![image.png](attachment:e0fedc60-3d3d-44e1-a423-fc085ce7d062.png)
 
 ### Answer 3: 
 104,838; 199,013; 109,645; 27,688; 35,202 (*closest*)
@@ -308,6 +298,7 @@ LIMIT 1;
 -------------+-----------------------
  2019-10-31  |                515.89 
 ```
+![image.png](attachment:7ab4376e-b191-4c75-bfeb-7aed0e1af29c.png)
 
 ### Answer 4: 
 2019-10-31
@@ -344,6 +335,7 @@ ORDER BY total_amount DESC;
  Morningside Heights | 13029.790000000028
 (3 rows) 
 ```
+![image.png](attachment:78c9f675-04b7-4fb8-99c9-42c97cdf7c68.png)
 
 ### Answer 5: 
 East Harlem North, East Harlem South, Morningside Heights
@@ -384,6 +376,7 @@ dropoff_zone | largest_tip
  JFK Airport  |        87.3
 (1 row) 
 ```
+![image.png](attachment:ac8e8669-be53-4711-b7b4-4b6848af38b5.png)
 
 ### Answer 6: 
 JFK Airport
