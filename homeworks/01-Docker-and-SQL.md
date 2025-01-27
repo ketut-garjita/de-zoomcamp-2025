@@ -2,6 +2,8 @@
 
 # Module 1 Homework: Docker & SQL
 
+---
+
 ## Question 1. Understanding docker first run
 
 Run docker with the python:3.12.8 image in an interactive mode, use the entrypoint bash.
@@ -37,6 +39,7 @@ docker run -it python:3.12.8 pip --version
 ### Answer 1: 
 24.3.1
 
+---
 
 ## Question 2. Understanding Docker networking and docker-compose
 
@@ -172,6 +175,8 @@ wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_z
 Download this data and put it into Postgres.
 
 You can use the code from the course. It's up to you whether you want to use Jupyter or a python script.
+
+---
 
 ## Question 3. Trip Segmentation Count
 
