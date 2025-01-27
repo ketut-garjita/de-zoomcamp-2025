@@ -129,7 +129,7 @@ volumes:
     ```
     docker ps   
     ```
-    ![image.png](attachment:8e55efb6-8d79-47f9-aefd-25a6dbcf49d9.png)
+    <img width="880" alt="image" src="https://github.com/user-attachments/assets/8a365741-3f4c-4249-83d9-2cfbc01969da" />
 
   
 - Check Connection
@@ -157,6 +157,7 @@ volumes:
 ### Answer 2: 
 postgres:5432
 
+---
 
 ## Prepare Postgres
 
@@ -265,11 +266,12 @@ up_to_1_mile | between_1_and_3_miles | between_3_and_7_miles | between_7_and_10_
        104830 |                198995 |                109642 |                  27686 |         35201
 (1 row) 
 ```
-![image.png](attachment:e0fedc60-3d3d-44e1-a423-fc085ce7d062.png)
+<img width="542" alt="image" src="https://github.com/user-attachments/assets/ce177cd6-02cd-4441-993e-74fa832b1d4d" />
 
 ### Answer 3: 
 104,838; 199,013; 109,645; 27,688; 35,202 (*closest*)
 
+---
 
 ## Question 4. Longest trip for each day
 
@@ -298,11 +300,12 @@ LIMIT 1;
 -------------+-----------------------
  2019-10-31  |                515.89 
 ```
-![image.png](attachment:7ab4376e-b191-4c75-bfeb-7aed0e1af29c.png)
+<img width="260" alt="image" src="https://github.com/user-attachments/assets/b4cc033d-c4a4-4878-ae90-59e9065d426f" />
 
 ### Answer 4: 
 2019-10-31
 
+---
 
 ## Question 5. Three biggest pickup zones
 
@@ -335,11 +338,12 @@ ORDER BY total_amount DESC;
  Morningside Heights | 13029.790000000028
 (3 rows) 
 ```
-![image.png](attachment:78c9f675-04b7-4fb8-99c9-42c97cdf7c68.png)
+<img width="274" alt="image" src="https://github.com/user-attachments/assets/fcb075be-6fac-45fe-a8ee-f3d2a717ff63" />
 
 ### Answer 5: 
 East Harlem North, East Harlem South, Morningside Heights
 
+---
 
 ## Question 6. Largest tip
 
@@ -376,11 +380,12 @@ dropoff_zone | largest_tip
  JFK Airport  |        87.3
 (1 row) 
 ```
-![image.png](attachment:ac8e8669-be53-4711-b7b4-4b6848af38b5.png)
+<img width="281" alt="image" src="https://github.com/user-attachments/assets/23d9e203-8ad1-4ff0-ae48-0fd58f466979" />
 
 ### Answer 6: 
 JFK Airport
 
+---
 
 ## Terraform
 
@@ -657,6 +662,7 @@ terraform init, terraform apply -auto-approve, terraform destroy
 
     - **terraform destroy**: This command deletes all the resources that Terraform manages, cleaning up the infrastructure.
 
+---
 
 ## Submitting the solutions
 
