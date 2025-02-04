@@ -37,8 +37,10 @@ OPTIONS (
 
 ![image](https://github.com/user-attachments/assets/f183439c-c354-4a11-9d5c-705451888de0)
 
+```
 CREATE OR REPLACE TABLE zoomcamp.yellow_tripdata_materialized AS
 SELECT * FROM zoomcamp.external_yellow_tripdata;
+```
 
 ![image](https://github.com/user-attachments/assets/c2e4c711-8720-46fa-b5da-10ad2d800e80)
 
