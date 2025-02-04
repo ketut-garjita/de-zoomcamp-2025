@@ -51,8 +51,9 @@ Question 1: What is count of records for the 2024 Yellow Taxi Data?
 - 85,431,289
 
 ### Solution
-
+```
 SELECT COUNT(*) FROM zoomcamp.yellow_tripdata_materialized;
+```
 
 ![image](https://github.com/user-attachments/assets/3b173452-28e9-4ce2-9d9c-136f829fc5c5)
 
@@ -71,16 +72,18 @@ What is the estimated amount of data that will be read when this query is execut
 
 
 ### Solution
-
+```
 SELECT COUNT(DISTINCT PULocationID) FROM zoomcamp.external_yellow_tripdata;
+```
 
 ![image](https://github.com/user-attachments/assets/096b78b0-bde3-4e63-9557-b5bc95fbaade)
 
 
 -- Bytes processed: 0 B (results cached)
 
-
+```
 SELECT COUNT(DISTINCT PULocationID) FROM `zoomcamp.yellow_tripdata_materialized`;
+```
 
 ![image](https://github.com/user-attachments/assets/a3c86d1b-1479-404e-afbd-d211ee8a29ef)
 
@@ -98,10 +101,14 @@ Write a query to retrieve the PULocationID form the table (not the external tabl
 - When selecting multiple columns, BigQuery performs an implicit join operation between them, increasing the estimated bytes processed
 
 ### Solution
+```
 SELECT PULocationID FROM zoomcamp.yellow_tripdata_materialized;
+```
 -- Bytes processed: 155.12 MB
 
+```
 SELECT PULocationID, DOLocationID FROM zoomcamp.yellow_tripdata_materialized;
+```
 -- Bytes processed: 310.24 MB
 
 ### Answer 3:
@@ -116,8 +123,10 @@ How many records have a fare_amount of 0?
 - `8,333`
 
 ### Solution
+```
 SELECT COUNT(*) FROM zoomcamp.yellow_tripdata_materialized 
 WHERE fare_amount = 0;
+```
 
 ![image](https://github.com/user-attachments/assets/dd311458-b14f-4090-9e3b-b9219ce4c2a6)
 
@@ -137,11 +146,13 @@ Best partcice for query performance:
 
 - Filter on partitioned columns
 - the order of the columns in which the clustering is specified is important in order to determine the column priority
-
+  
+```
 CREATE OR REPLACE TABLE zoomcamp.yellow_tripdata_partitoned_clustered
 PARTITION BY DATE(tpep_pickup_datetime)
 CLUSTER BY VendorID AS
 SELECT * FROM zoomcamp.external_yellow_tripdata;
+```
 
 ![image](https://github.com/user-attachments/assets/326930c7-0b00-4554-a0ed-4ee8f338c297)
 
@@ -161,16 +172,19 @@ Choose the answer which most closely matches.
 - 310.31 MB for non-partitioned table and 285.64 MB for the partitioned table
 
 ### Solution
-
+```
 SELECT DISTINCT VendorID FROM zoomcamp.yellow_tripdata_materialized
 -- WHERE tpep_dropoff_datetime BETWEEN '2024-03-01' AND '2024-03-15';
 WHERE tpep_dropoff_datetime > '2024-03-01' AND tpep_dropoff_datetime <= '2024-03-15';
+```
 
 ![image](https://github.com/user-attachments/assets/899a4b19-5333-4b4b-960a-6308f9acb0df)
 
+```
 SELECT DISTINCT VendorID FROM zoomcamp.yellow_tripdata_partitoned_clustered
 -- WHERE tpep_dropoff_datetime BETWEEN '2024-03-01' AND '2024-03-15';
 WHERE tpep_dropoff_datetime > '2024-03-01' AND tpep_dropoff_datetime <= '2024-03-15';
+```
 
 ![image](https://github.com/user-attachments/assets/901fff6f-40c2-4b82-85ef-20cb3f2ffa1d)
 
