@@ -23,6 +23,8 @@ Create a (regular/materialized) table in BQ using the Yellow Taxi Trip Records (
 
 python load_yellow_taxi_data.py
 
+![image](https://github.com/user-attachments/assets/741e35ad-a163-4774-86dc-be81e00a69df)
+
 ![image.png](attachment:b8e66e68-3e39-4bfa-8b51-234d4e3226fc.png)
 
 CREATE OR REPLACE EXTERNAL TABLE `zoomcamp.external_yellow_tripdata`
