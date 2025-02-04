@@ -21,25 +21,26 @@ BIG QUERY SETUP:
 Create an external table using the Yellow Taxi Trip Records.
 Create a (regular/materialized) table in BQ using the Yellow Taxi Trip Records (do not partition or cluster this table).
 
+```
 python load_yellow_taxi_data.py
+```
 
 ![image](https://github.com/user-attachments/assets/741e35ad-a163-4774-86dc-be81e00a69df)
 
-![image.png](attachment:b8e66e68-3e39-4bfa-8b51-234d4e3226fc.png)
-
+```
 CREATE OR REPLACE EXTERNAL TABLE `zoomcamp.external_yellow_tripdata`
 OPTIONS (
   format = 'PARQUET',
   uris = ['gs://dezoomcamp_hw3_2025_id/yellow_tripdata_2024-*.parquet']
 );
+```
 
-![image.png](attachment:33a7b9e0-543d-495b-90d0-3be62ff6b86d.png)
+![image](https://github.com/user-attachments/assets/f183439c-c354-4a11-9d5c-705451888de0)
 
 CREATE OR REPLACE TABLE zoomcamp.yellow_tripdata_materialized AS
 SELECT * FROM zoomcamp.external_yellow_tripdata;
 
-
-![image.png](attachment:9e78f0f6-256a-4e12-8790-fd1546b37054.png)
+![image](https://github.com/user-attachments/assets/c2e4c711-8720-46fa-b5da-10ad2d800e80)
 
 ## Question 1:
 Question 1: What is count of records for the 2024 Yellow Taxi Data?
@@ -53,7 +54,8 @@ Question 1: What is count of records for the 2024 Yellow Taxi Data?
 
 SELECT COUNT(*) FROM zoomcamp.yellow_tripdata_materialized;
 
-![image.png](attachment:eb234a6a-774a-4e2f-a29e-2b58450dc379.png)
+![image](https://github.com/user-attachments/assets/3b173452-28e9-4ce2-9d9c-136f829fc5c5)
+
 
 ### Answer 1:
 20,332,093
@@ -69,13 +71,19 @@ What is the estimated amount of data that will be read when this query is execut
 
 
 ### Solution
+
 SELECT COUNT(DISTINCT PULocationID) FROM zoomcamp.external_yellow_tripdata;
-![image.png](attachment:f1c5f1af-126b-4207-8c02-0896436209ed.png)
+
+![image](https://github.com/user-attachments/assets/096b78b0-bde3-4e63-9557-b5bc95fbaade)
+
+
 -- Bytes processed: 0 B (results cached)
 
 
 SELECT COUNT(DISTINCT PULocationID) FROM `zoomcamp.yellow_tripdata_materialized`;
-![image.png](attachment:aea93701-77aa-4912-b1eb-56f2a332f018.png)
+
+![image](https://github.com/user-attachments/assets/a3c86d1b-1479-404e-afbd-d211ee8a29ef)
+
 -- Bytes processed: 0 B
 
 ### Answer 2:
@@ -110,7 +118,8 @@ How many records have a fare_amount of 0?
 ### Solution
 SELECT COUNT(*) FROM zoomcamp.yellow_tripdata_materialized 
 WHERE fare_amount = 0;
-![image.png](attachment:5d2f081a-c8ee-4c7f-8e6c-c15796c4ce13.png)
+
+![image](https://github.com/user-attachments/assets/dd311458-b14f-4090-9e3b-b9219ce4c2a6)
 
 ### Answer 4:
 8,333
@@ -134,9 +143,9 @@ PARTITION BY DATE(tpep_pickup_datetime)
 CLUSTER BY VendorID AS
 SELECT * FROM zoomcamp.external_yellow_tripdata;
 
-![image.png](attachment:230b1c69-4473-468c-8370-065f2cb57759.png)
+![image](https://github.com/user-attachments/assets/326930c7-0b00-4554-a0ed-4ee8f338c297)
 
-### Answer 4:
+### Answer 5:
 Partition by tpep_dropoff_timedate and Cluster on VendorID
 
 ## Question 6:
@@ -157,13 +166,13 @@ SELECT DISTINCT VendorID FROM zoomcamp.yellow_tripdata_materialized
 -- WHERE tpep_dropoff_datetime BETWEEN '2024-03-01' AND '2024-03-15';
 WHERE tpep_dropoff_datetime > '2024-03-01' AND tpep_dropoff_datetime <= '2024-03-15';
 
-![image.png](attachment:1785adb3-067d-4874-a9b1-9c74f3eb5bd0.png)
+![image](https://github.com/user-attachments/assets/899a4b19-5333-4b4b-960a-6308f9acb0df)
 
 SELECT DISTINCT VendorID FROM zoomcamp.yellow_tripdata_partitoned_clustered
 -- WHERE tpep_dropoff_datetime BETWEEN '2024-03-01' AND '2024-03-15';
 WHERE tpep_dropoff_datetime > '2024-03-01' AND tpep_dropoff_datetime <= '2024-03-15';
 
-![image.png](attachment:d4105ca9-baa0-4b42-b2e5-7701c354ec8b.png)
+![image](https://github.com/user-attachments/assets/901fff6f-40c2-4b82-85ef-20cb3f2ffa1d)
 
 ### Answer 6:
 310.24 MB for non-partitioned table and 26.84 MB for the partitioned table
