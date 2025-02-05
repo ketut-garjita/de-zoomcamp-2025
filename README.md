@@ -18,7 +18,7 @@
   - [Solution & Answer](https://github.com/ketut-garjita/de-zoomcamp-2025/blob/main/homeworks/02-workflow-orchestration.ipynb)
   - [Form for Submitting](https://courses.datatalks.club/de-zoomcamp-2025/homework/hw2)
 
-### Module 2 : Data Waraehouse
+### Module 3 : Data Waraehouse
 - [Resource](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/03-data-warehouse)
 - Howework
   - [Questions](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2025/03-data-warehouse/homework.md)
