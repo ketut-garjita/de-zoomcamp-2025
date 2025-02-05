@@ -21,6 +21,8 @@ BIG QUERY SETUP:
 Create an external table using the Yellow Taxi Trip Records.
 Create a (regular/materialized) table in BQ using the Yellow Taxi Trip Records (do not partition or cluster this table).
 
+[load_yellow_taxi_data.py](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2025/03-data-warehouse/load_yellow_taxi_data.py)
+
 ```
 python load_yellow_taxi_data.py
 ```
