@@ -77,21 +77,16 @@ What is the estimated amount of data that will be read when this query is execut
 
 ### Solution
 ```
-SELECT COUNT(DISTINCT PULocationID) FROM zoomcamp.external_yellow_tripdata;
+SELECT COUNT(DISTINCT PULocationID) 
+FROM zoomcamp.external_yellow_tripdata
 ```
-
-![image](https://github.com/user-attachments/assets/096b78b0-bde3-4e63-9557-b5bc95fbaade)
-
-
--- Bytes processed: 0 B (results cached)
+<img width="605" alt="image" src="https://github.com/user-attachments/assets/98dcc99a-6b02-4773-a6e3-90ee9ac45d62" />
 
 ```
-SELECT COUNT(DISTINCT PULocationID) FROM `zoomcamp.yellow_tripdata_materialized`;
+SELECT COUNT(DISTINCT PULocationID)
+FROM `zoomcamp.yellow_tripdata_materialized
 ```
-
-![image](https://github.com/user-attachments/assets/a3c86d1b-1479-404e-afbd-d211ee8a29ef)
-
--- Bytes processed: 0 B
+<img width="338" alt="image" src="https://github.com/user-attachments/assets/abc05904-ad82-46dd-af92-f79ef0f39b47" />
 
 ### Answer 2:
 0 MB for the External Table and 0MB for the Materialized Table
