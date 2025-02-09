@@ -103,12 +103,12 @@ Write a query to retrieve the PULocationID form the table (not the external tabl
 ```
 SELECT PULocationID FROM zoomcamp.yellow_tripdata_materialized;
 ```
--- Bytes processed: 155.12 MB
+<img width="495" alt="image" src="https://github.com/user-attachments/assets/52cc42a7-20b6-4a0b-a744-8d319254796f" />
 
 ```
 SELECT PULocationID, DOLocationID FROM zoomcamp.yellow_tripdata_materialized;
 ```
--- Bytes processed: 310.24 MB
+<img width="493" alt="image" src="https://github.com/user-attachments/assets/d82889d6-7daf-4ca2-837f-7c42b5b3bbb4" />
 
 ### Answer 3:
 BigQuery is a columnar database, and it only scans the specific columns requested in the query. Querying two columns (PULocationID, DOLocationID) requires reading more data than querying one column (PULocationID), leading to a higher estimated number of bytes processed.
