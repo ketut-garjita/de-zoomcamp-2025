@@ -70,9 +70,9 @@ Write a query to count the distinct number of PULocationIDs for the entire datas
 What is the estimated amount of data that will be read when this query is executed on the External Table and the Table?
 
 - 18.82 MB for the External Table and 47.60 MB for the Materialized Table
-- 0 MB for the External Table and 155.12 MB for the Materialized Table
+- `0 MB for the External Table and 155.12 MB for the Materialized Table`
 - 2.14 GB for the External Table and 0MB for the Materialized Table
-- `0 MB for the External Table and 0MB for the Materialized Table`
+- 0 MB for the External Table and 0MB for the Materialized Table
 
 
 ### Solution
@@ -89,7 +89,7 @@ FROM `zoomcamp.yellow_tripdata_materialized
 <img width="338" alt="image" src="https://github.com/user-attachments/assets/abc05904-ad82-46dd-af92-f79ef0f39b47" />
 
 ### Answer 2:
-0 MB for the External Table and 0MB for the Materialized Table
+0 MB for the External Table and 155.12 MB for the Materialized Table
 
 ## Question 3:
 Write a query to retrieve the PULocationID form the table (not the external table) in BigQuery. Now write a query to retrieve the PULocationID and DOLocationID on the same table. Why are the estimated number of Bytes different?
