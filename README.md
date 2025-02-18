@@ -31,3 +31,10 @@
   - [Questions](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2025/workshops/dlt/dlt_homework.md)
   - [Solution & Answer](https://colab.research.google.com/drive/1xtnig3la1MoGC_LGkFBHpqfea0iidZo1)
   - [Form for Submitting](https://courses.datatalks.club/de-zoomcamp-2025/homework/workshop1)
+
+### Module 4 : Analytics Engineering
+- [Resource](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/04-analytics-engineering)
+- Howework
+  - [Questions](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2025/04-analytics-engineering/homework.md)
+  - [Solution & Answer]()
+  - [Form for Submitting](https://courses.datatalks.club/de-zoomcamp-2025/homework/hw4)
