@@ -1,4 +1,4 @@
-Solution #1
+Solution #1:
 
 1. Understanding the source() Function
 The source('raw_nyc_tripdata', 'ext_green_taxi') call references the sources.yaml file:
@@ -158,7 +158,7 @@ When using staging, it materializes in the dataset defined in DBT_BIGQUERY_STAGI
 
 -------------------------------------------------------------------------------------
 
-Solution #5
+Solution #5:
 
 (dbt_env) dataeng@dataeng-virtual-machine:~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_quarterly_revenue.sql --debug
 13:24:40  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591414a70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a059168ba70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591291700>]}
@@ -302,7 +302,7 @@ year,quarter,service_type,revenue,prev_year_revenue,yoy_growth
 
 -------------------------------------------------------------------------------------
 
-Solution #6
+Solution #6:
 
 ~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_monthly_fare_p95 --debug
 13:01:54  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b65c26810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b676f5a60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b662e98b0>]}
