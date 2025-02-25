@@ -99,7 +99,7 @@ To determine which option does NOT apply for materializing fct_taxi_monthly_zone
    ```
 - Evaluating the dbt Commands
    ```
-   ✅ Valid Commands (these will materialize fct_taxi_monthly_zone_revenue):
+   Valid Commands (these will materialize fct_taxi_monthly_zone_revenue):
 
    dbt run  
    Runs all models, including fct_taxi_monthly_zone_revenue.
@@ -118,14 +118,15 @@ To determine which option does NOT apply for materializing fct_taxi_monthly_zone
    Runs all models in core/ and their dependencies.
    ✅ Valid.
 
-   ❌ Invalid Command (this will NOT materialize fct_taxi_monthly_zone_revenue):
+   Invalid Command (this will NOT materialize fct_taxi_monthly_zone_revenue):
    
-      dbt run --select models/staging/+
-      models/staging/+ selects all staging models and their children.
-      If fct_taxi_monthly_zone_revenue is in core/, this does NOT select it!
-      ❌ This does NOT apply for materializing fct_taxi_monthly_zone_revenue.
+   dbt run --select models/staging/+
+   models/staging/+ selects all staging models and their children.
+   If fct_taxi_monthly_zone_revenue is in core/, this does NOT select it!
+   ❌ This does NOT apply for materializing fct_taxi_monthly_zone_revenue.
 
 - Final Answer:
+  
 ❌ dbt run --select models/staging/+ does NOT apply.
 
 -------------------------------------------------------------------------------------
