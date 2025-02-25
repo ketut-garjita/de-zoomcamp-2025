@@ -121,7 +121,7 @@ To determine which option does NOT apply for materializing fct_taxi_monthly_zone
 
 -------------------------------------------------------------------------------------
 
-## Solution #4;
+## Solution #4:
 
 Analyzing the Macro Behavior
 The macro resolve_schema_for(model_type) dynamically determines the schema (dataset) based on the model type.
