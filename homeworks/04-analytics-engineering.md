@@ -2,14 +2,14 @@
 
 1. Understanding the source() Function
    
-  The source('raw_nyc_tripdata', 'ext_green_taxi') call references the sources.yaml file:
-  
-  sources:
-    - name: raw_nyc_tripdata
-      database: "{{ env_var('DBT_BIGQUERY_PROJECT', 'dtc_zoomcamp_2025') }}"
-      schema:   "{{ env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') }}"
-      tables:
-        - name: ext_green_taxi
+     The source('raw_nyc_tripdata', 'ext_green_taxi') call references the sources.yaml file:
+     
+     sources:
+       - name: raw_nyc_tripdata
+         database: "{{ env_var('DBT_BIGQUERY_PROJECT', 'dtc_zoomcamp_2025') }}"
+         schema:   "{{ env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') }}"
+         tables:
+           - name: ext_green_taxi
 
 2. Resolving Environment Variables
 The following environment variables are set in the dbt runtime environment:
