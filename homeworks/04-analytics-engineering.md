@@ -1,4 +1,4 @@
-## SOLUTION #1:
+## Solution #1:
 
 1. Understanding the source() Function
    
@@ -32,7 +32,7 @@
       ```
 -------------------------------------------------------------------------------------
 
-## SOLUTION #2:
+## Solution #2:
 
 To ensure that command-line arguments take precedence over environment variables, which take precedence over the default value, let's analyze each option carefully.
 
@@ -74,47 +74,50 @@ To ensure that command-line arguments take precedence over environment variables
    ```
 -------------------------------------------------------------------------------------
 
-SOLUTION #3:
+Solution #3:
 
 To determine which option does NOT apply for materializing fct_taxi_monthly_zone_revenue, let's break this down step by step.
 
-1. Understanding dbt Materialization and Data Lineage
+- Understanding dbt Materialization and Data Lineage
    ```
    taxi_zone_lookup is a seed file (from .csv), meaning it's materialized with dbt seed.
    fct_taxi_monthly_zone_revenue depends on upstream models.
    For fct_taxi_monthly_zone_revenue to materialize, all its dependencies must also be built.
    ```
-2. Evaluating the dbt Commands
-✅ Valid Commands (these will materialize fct_taxi_monthly_zone_revenue):
-dbt run
+- Evaluating the dbt Commands
+   ```
+   ✅ Valid Commands (these will materialize fct_taxi_monthly_zone_revenue):
 
-Runs all models, including fct_taxi_monthly_zone_revenue.
-✅ Valid.
-dbt run --select +models/core/dim_taxi_trips.sql+ --target prod
+   dbt run  
+   Runs all models, including fct_taxi_monthly_zone_revenue.
+   ✅ Valid.
 
-+ means it selects dim_taxi_trips.sql and all its parents and children.
-If dim_taxi_trips is an upstream dependency of fct_taxi_monthly_zone_revenue, this will work.
-✅ Valid.
-dbt run --select +models/core/fct_taxi_monthly_zone_revenue.sql
+   dbt run --select +models/core/dim_taxi_trips.sql+ --target prod
+   + means it selects dim_taxi_trips.sql and all its parents and children.
+   If dim_taxi_trips is an upstream dependency of fct_taxi_monthly_zone_revenue, this will work.
+   ✅ Valid.
 
-+ means it selects fct_taxi_monthly_zone_revenue.sql and all upstream dependencies.
-✅ Valid.
-dbt run --select +models/core/
+   dbt run --select +models/core/fct_taxi_monthly_zone_revenue.sql
+   + means it selects fct_taxi_monthly_zone_revenue.sql and all upstream dependencies.
+   ✅ Valid.
 
-Runs all models in core/ and their dependencies.
-✅ Valid.
+   dbt run --select +models/core/
+   Runs all models in core/ and their dependencies.
+   ✅ Valid.
+
 ❌ Invalid Command (this will NOT materialize fct_taxi_monthly_zone_revenue):
-dbt run --select models/staging/+
-models/staging/+ selects all staging models and their children.
-If fct_taxi_monthly_zone_revenue is in core/, this does NOT select it!
-❌ This does NOT apply for materializing fct_taxi_monthly_zone_revenue.
 
-3. Final Answer:
+   dbt run --select models/staging/+
+   models/staging/+ selects all staging models and their children.
+   If fct_taxi_monthly_zone_revenue is in core/, this does NOT select it!
+   ❌ This does NOT apply for materializing fct_taxi_monthly_zone_revenue.
+
+- Final Answer:
 ❌ dbt run --select models/staging/+ does NOT apply.
 
 -------------------------------------------------------------------------------------
 
-SOLUTION #4;
+Solution #4;
 
 Analyzing the Macro Behavior
 The macro resolve_schema_for(model_type) dynamically determines the schema (dataset) based on the model type.
@@ -172,7 +175,7 @@ When using staging, it materializes in the dataset defined in DBT_BIGQUERY_STAGI
 
 -------------------------------------------------------------------------------------
 
-SOLUTION #5:
+Solution #5:
 
 (dbt_env) dataeng@dataeng-virtual-machine:~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_quarterly_revenue.sql --debug
 13:24:40  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591414a70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a059168ba70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591291700>]}
@@ -316,7 +319,7 @@ year,quarter,service_type,revenue,prev_year_revenue,yoy_growth
 
 -------------------------------------------------------------------------------------
 
-SOLUTION #6:
+Solution #6:
 
 ~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_monthly_fare_p95 --debug
 13:01:54  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b65c26810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b676f5a60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b662e98b0>]}
@@ -438,7 +441,7 @@ Previewing node 'fct_taxi_trips_monthly_fare_p95':
 
 -------------------------------------------------------------------------------------
 
-SOLUTION #7:
+Solution #7:
 
 Step 1: Create a Staging Model (stg_fhv_trips.sql)
 Filter out records where dispatching_base_num is NULL:
