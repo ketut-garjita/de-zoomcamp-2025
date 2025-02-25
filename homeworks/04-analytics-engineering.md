@@ -1,4 +1,5 @@
 ## SOLUTION #1:
+
 1. Understanding the source() Function
    
      The source('raw_nyc_tripdata', 'ext_green_taxi') call references the sources.yaml file:
@@ -11,13 +12,13 @@
            - name: ext_green_taxi
 
 2. Resolving Environment Variables
-The following environment variables are set in the dbt runtime environment:
-
-export DBT_BIGQUERY_PROJECT=myproject
-export DBT_BIGQUERY_DATASET=my_nyc_tripdata
-
-- env_var('DBT_BIGQUERY_PROJECT', 'dtc_zoomcamp_2025') → myproject
-- env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') → raw_nyc_tripdata
+      The following environment variables are set in the dbt runtime environment:
+      
+      export DBT_BIGQUERY_PROJECT=myproject
+      export DBT_BIGQUERY_DATASET=my_nyc_tripdata
+      
+      - env_var('DBT_BIGQUERY_PROJECT', 'dtc_zoomcamp_2025') → myproject
+      - env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') → raw_nyc_tripdata
 
 3. Final Compilation
 When dbt compiles {{ source('raw_nyc_tripdata', 'ext_green_taxi') }}, it expands to:
