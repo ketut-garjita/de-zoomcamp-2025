@@ -49,37 +49,38 @@ To ensure that command-line arguments take precedence over environment variables
 
 - Understanding var() and env_var() in dbt
    
-      ```
-      var("days_back", 30):
-      Uses the variable days_back, defaulting to 30 if not provided.
-      Command-line arguments (--vars) override this.
-      env_var("DAYS_BACK", "30"):
-      Reads the environment variable DAYS_BACK, defaulting to "30" if not found.
-      Environment variables override the default but are overridden by command-line arguments.
-      Priority order in dbt:
-      Command-line argument: dbt run --vars '{"days_back": 7}'
-      Environment variable: export DAYS_BACK=7
-      Default value: 30
-      ```
+   ```
+   var("days_back", 30):
+   Uses the variable days_back, defaulting to 30 if not provided.
+   Command-line arguments (--vars) override this.
+   env_var("DAYS_BACK", "30"):
+   Reads the environment variable DAYS_BACK, defaulting to "30" if not found.
+   Environment variables override the default but are overridden by command-line arguments.
+   Priority order in dbt:
+   Command-line argument: dbt run --vars '{"days_back": 7}'
+   Environment variable: export DAYS_BACK=7
+   Default value: 30
+   ```
 
 - Evaluating the options
-      ```
-      ❌ Incorrect:
-      Add ORDER BY pickup_datetime DESC and LIMIT {{ var("days_back", 30) }}
-      
-      This does not modify the filtering logic based on the date range.
-      Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ env_var("DAYS_BACK", "30") }}' DAY
-      
-      This prioritizes the environment variable but does not check for a command-line argument.
-      ✅ Correct:
-      Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
-      This ensures the following precedence:
-      Command-line argument (var("days_back"))
-      Environment variable (env_var("DAYS_BACK"))
-      Default value (30)
-      ```
+   ```
+   ❌ Incorrect:
+   Add ORDER BY pickup_datetime DESC and LIMIT {{ var("days_back", 30) }}
+   
+   This does not modify the filtering logic based on the date range.
+   Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ env_var("DAYS_BACK", "30") }}' DAY
+   
+   This prioritizes the environment variable but does not check for a command-line argument.
+   ✅ Correct:
+   Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
+   This ensures the following precedence:
+   Command-line argument (var("days_back"))
+   Environment variable (env_var("DAYS_BACK"))
+   Default value (30)
+   ```
       
 - Final Answer:
+  
    ```
    ✅ Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
    ```
