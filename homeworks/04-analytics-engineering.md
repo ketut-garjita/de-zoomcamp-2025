@@ -36,6 +36,8 @@ SOLUTION #2:
 To ensure that command-line arguments take precedence over environment variables, which take precedence over the default value, let's analyze each option carefully.
 
 1. Understanding var() and env_var() in dbt
+   
+      ```
       var("days_back", 30):
       Uses the variable days_back, defaulting to 30 if not provided.
       Command-line arguments (--vars) override this.
@@ -46,8 +48,9 @@ To ensure that command-line arguments take precedence over environment variables
       Command-line argument: dbt run --vars '{"days_back": 7}'
       Environment variable: export DAYS_BACK=7
       Default value: 30
+      ```
 
-2. Evaluating the options
+3. Evaluating the options
       ❌ Incorrect:
       Add ORDER BY pickup_datetime DESC and LIMIT {{ var("days_back", 30) }}
       
@@ -62,7 +65,7 @@ To ensure that command-line arguments take precedence over environment variables
       Environment variable (env_var("DAYS_BACK"))
       Default value (30)
 
-3. Final Answer:
+4. Final Answer:
 ✅ Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
 
 -------------------------------------------------------------------------------------
