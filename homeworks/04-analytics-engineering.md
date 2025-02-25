@@ -310,10 +310,10 @@ year,quarter,service_type,revenue,prev_year_revenue,yoy_growth
 2020,4,Yellow,56866458.78,199618124.62,-71.51
 2020,1,Yellow,150767293.31,188266358.05,-19.92
 ```
+-------------------------------------------------------------------------------------
 
-
-Solution #6:
-
+## Solution #6:
+```
 ~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_monthly_fare_p95 --debug
 13:01:54  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b65c26810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b676f5a60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b662e98b0>]}
 13:01:54  Running with dbt=1.9.2
@@ -347,15 +347,9 @@ Solution #6:
 13:02:06  Writing injected SQL for node "model.mydbt.fct_taxi_trips_monthly_fare_p95"
 13:02:06  Began executing node model.mydbt.fct_taxi_trips_monthly_fare_p95
 13:02:07  Writing runtime sql for node "model.mydbt.fct_taxi_trips_monthly_fare_p95"
-13:02:07  On model.mydbt.fct_taxi_trips_monthly_fare_p95: /* {"app": "dbt", "dbt_version": "1.9.2", "profile_name": "mydbt", "target_name": "dev", "node_id": "model.mydbt.fct_taxi_trips_monthly_fare_p95"} */
+13:02:07  On model.mydbt.fct_taxi_trips_monthly_fare_p95: /* {"app": "dbt", "dbt_version": "1.9.2", "profile_name": "mydbt", "target_name": "dev", "node_id": "model.mydbt.fct_taxi_trips_monthly_fare_p95"} */    
 
-  
-    
-
-    create or replace table `de-zoomcamp-2025--id`.`zoomcamp`.`fct_taxi_trips_monthly_fare_p95`
-      
-    
-    
+    create or replace table `de-zoomcamp-2025--id`.`zoomcamp`.`fct_taxi_trips_monthly_fare_p95`    
 
     OPTIONS()
     as (
@@ -431,10 +425,10 @@ Previewing node 'fct_taxi_trips_monthly_fare_p95':
 | ------------ | ---- | ----- | --- | ---- | ---- |
 | Green        | 2020 |     4 |  25 | 22,0 | 17,5 |
 | Yellow       | 2020 |     4 |  29 | 24,5 | 18,5 |
-
+```
 -------------------------------------------------------------------------------------
 
-Solution #7:
+## Solution #7:
 
 Step 1: Create a Staging Model (stg_fhv_trips.sql)
 Filter out records where dispatching_base_num is NULL:
@@ -513,6 +507,7 @@ Yorkville East	Garment District
 Newark Airport	NV
 SoHo	Greenwich Village South
 
+-------------------------------------------------------------------------------------
 
 
 
