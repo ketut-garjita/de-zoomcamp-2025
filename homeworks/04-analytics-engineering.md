@@ -429,7 +429,7 @@ Previewing node 'fct_taxi_trips_monthly_fare_p95':
 -------------------------------------------------------------------------------------
 
 ## Solution #7:
-
+```
 Step 1: Create a Staging Model (stg_fhv_trips.sql)
 Filter out records where dispatching_base_num is NULL:
 
@@ -506,7 +506,7 @@ pickup_zone	    dropoff_zone
 Yorkville East	Garment District
 Newark Airport	NV
 SoHo	Greenwich Village South
-
+```
 -------------------------------------------------------------------------------------
 
 
