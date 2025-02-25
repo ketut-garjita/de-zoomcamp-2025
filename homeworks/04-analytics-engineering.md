@@ -180,99 +180,24 @@ Final Answer:
 
 ## Solution #5:
 ```
-(dbt_env) dataeng@dataeng-virtual-machine:~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_quarterly_revenue.sql --debug
-13:24:40  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591414a70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a059168ba70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591291700>]}
-13:24:40  Running with dbt=1.9.2
-13:24:40  running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'debug': 'True', 'log_path': '/home/dataeng/projects/dbt/docker_setup/mydbt/logs', 'profiles_dir': '/home/dataeng/.dbt', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'invocation_command': 'dbt run --select fct_taxi_trips_quarterly_revenue.sql --debug', 'static_parser': 'True', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
-13:24:42  Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'eac705d9-fcba-4c16-87e3-81c7284bbf1c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a05912d5850>]}
-13:24:43  Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'eac705d9-fcba-4c16-87e3-81c7284bbf1c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591bda780>]}
-13:24:43  Registered adapter: bigquery=1.9.1
-13:24:43  checksum: 12b12750b70de726cfd89136b8e24afc3f3e77597a97bff40ab7e5f9b39d5e18, vars: {}, profile: , target: , version: 1.9.2
-13:24:44  Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
-13:24:44  Partial parsing: updated file: mydbt://models/core/fct_taxi_trips_quarterly_revenue.sql
-13:24:45  Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'eac705d9-fcba-4c16-87e3-81c7284bbf1c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0570cdb080>]}
-13:24:45  Wrote artifact WritableManifest to /home/dataeng/projects/dbt/docker_setup/mydbt/target/manifest.json
-13:24:45  Wrote artifact SemanticManifest to /home/dataeng/projects/dbt/docker_setup/mydbt/target/semantic_manifest.json
-13:24:45  Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'eac705d9-fcba-4c16-87e3-81c7284bbf1c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0570c7d430>]}
-13:24:45  Found 7 models, 1 analysis, 1 seed, 11 data tests, 2 sources, 628 macros
-13:24:45  Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'eac705d9-fcba-4c16-87e3-81c7284bbf1c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0570cdd7f0>]}
-13:24:45  
-13:24:45  Concurrency: 1 threads (target='dev')
-13:24:45  
-13:24:45  Acquiring new bigquery connection 'master'
-13:24:45  Acquiring new bigquery connection 'list_de-zoomcamp-2025--id'
-13:24:45  Opening a new connection, currently in state init
-13:24:46  Re-using an available connection from the pool (formerly list_de-zoomcamp-2025--id, now list_de-zoomcamp-2025--id_zoomcamp)
-13:24:46  Opening a new connection, currently in state closed
-13:24:46  Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'eac705d9-fcba-4c16-87e3-81c7284bbf1c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0570ec0e00>]}
-13:24:46  Opening a new connection, currently in state init
-13:24:46  Began running node model.mydbt.fct_taxi_trips_quarterly_revenue
-13:24:46  1 of 1 START sql table model zoomcamp.fct_taxi_trips_quarterly_revenue ......... [RUN]
-13:24:46  Re-using an available connection from the pool (formerly list_de-zoomcamp-2025--id_zoomcamp, now model.mydbt.fct_taxi_trips_quarterly_revenue)
-13:24:46  Began compiling node model.mydbt.fct_taxi_trips_quarterly_revenue
-13:24:46  Writing injected SQL for node "model.mydbt.fct_taxi_trips_quarterly_revenue"
-13:24:46  Began executing node model.mydbt.fct_taxi_trips_quarterly_revenue
-13:24:47  Writing runtime sql for node "model.mydbt.fct_taxi_trips_quarterly_revenue"
-13:24:47  On model.mydbt.fct_taxi_trips_quarterly_revenue: /* {"app": "dbt", "dbt_version": "1.9.2", "profile_name": "mydbt", "target_name": "dev", "node_id": "model.mydbt.fct_taxi_trips_quarterly_revenue"} */   
+$ dbt run --select fct_taxi_trips_quarterly_revenue
+10:15:17  Running with dbt=1.9.2
+10:15:20  Registered adapter: bigquery=1.9.1
+10:15:22  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
+10:15:22  
+10:15:22  Concurrency: 1 threads (target='dev')
+10:15:22  
+10:15:23  1 of 1 START sql table model zoomcamp.fct_taxi_trips_quarterly_revenue ......... [RUN]
+10:15:28  1 of 1 OK created sql table model zoomcamp.fct_taxi_trips_quarterly_revenue .... [CREATE TABLE (42.0 rows, 1.8 GiB processed) in 4.44s]
+10:15:28  
+10:15:28  Finished running 1 table model in 0 hours 0 minutes and 5.65 seconds (5.65s).
+10:15:28  
+10:15:28  Completed successfully
+10:15:28  
+10:15:28  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
+```
 
-    create or replace table `de-zoomcamp-2025--id`.`zoomcamp`.`fct_taxi_trips_quarterly_revenue`    
-
-    OPTIONS()
-    as (
-      WITH quarterly_revenue AS (
-    SELECT
-        EXTRACT(YEAR FROM pickup_datetime) AS year,
-        EXTRACT(QUARTER FROM pickup_datetime) AS quarter,
-        trip_type,
-        SUM(total_amount) AS revenue
-    FROM `de-zoomcamp-2025--id`.`zoomcamp`.`fact_trips`
-    GROUP BY 1, 2, 3
-),
-
-yoy_growth AS (
-    SELECT
-        year,
-        quarter,
-        trip_type,
-        revenue,
-        LAG(revenue) OVER (PARTITION BY trip_type, quarter ORDER BY year) AS prev_year_revenue,
-        ROUND(
-            (revenue - LAG(revenue) OVER (PARTITION BY trip_type, quarter ORDER BY year)) / 
-            NULLIF(LAG(revenue) OVER (PARTITION BY trip_type, quarter ORDER BY year), 0) * 100, 
-            2
-        ) AS yoy_growth
-    FROM quarterly_revenue
-)
-
-SELECT * FROM yoy_growth
-ORDER BY trip_type, year, quarter
-    );
-  
-13:24:47  Opening a new connection, currently in state closed
-13:24:47  BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-zoomcamp-2025--id&j=bq:asia-southeast2:48ac96e1-7cd3-45a6-a921-7d1caba83846&page=queryresults
-13:24:50  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'eac705d9-fcba-4c16-87e3-81c7284bbf1c', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0571383770>]}
-13:24:50  1 of 1 OK created sql table model zoomcamp.fct_taxi_trips_quarterly_revenue .... [CREATE TABLE (42.0 rows, 1.8 GiB processed) in 3.77s]
-13:24:50  Finished running node model.mydbt.fct_taxi_trips_quarterly_revenue
-13:24:50  Opening a new connection, currently in state closed
-13:24:50  Connection 'master' was properly closed.
-13:24:50  Connection 'model.mydbt.fct_taxi_trips_quarterly_revenue' was properly closed.
-13:24:50  
-13:24:50  Finished running 1 table model in 0 hours 0 minutes and 5.20 seconds (5.20s).
-13:24:50  Command end result
-13:24:51  Wrote artifact WritableManifest to /home/dataeng/projects/dbt/docker_setup/mydbt/target/manifest.json
-13:24:51  Wrote artifact SemanticManifest to /home/dataeng/projects/dbt/docker_setup/mydbt/target/semantic_manifest.json
-13:24:51  Wrote artifact RunExecutionResult to /home/dataeng/projects/dbt/docker_setup/mydbt/target/run_results.json
-13:24:51  
-13:24:51  Completed successfully
-13:24:51  
-13:24:51  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
-13:24:51  Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 11.62751, "process_in_blocks": "0", "process_kernel_time": 1.7015, "process_mem_max_rss": "221992", "process_out_blocks": "4488", "process_user_time": 10.968739}
-13:24:51  Command `dbt run` succeeded at 20:24:51.548185 after 11.65 seconds
-13:24:51  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a05915775c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591414a70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0570ea3a10>]}
-13:24:51  Flushing usage events
-13:24:53  An error was encountered while trying to flush usage events
-
-
+```
 WITH quarterly_revenue AS (
     SELECT
         EXTRACT(YEAR FROM pickup_datetime) AS year,
@@ -301,8 +226,9 @@ yoy_growth AS (
 SELECT *
 FROM yoy_growth
 WHERE year = 2020
-ORDER BY service_type, yoy_growth
---LIMIT 1;
+ORDER BY service_type, yoy_growth;
+
+<img width="734" alt="image" src="https://github.com/user-attachments/assets/bab532f8-e182-46d2-81a5-6deb8cb9aaf8" />
 
 year,quarter,service_type,revenue,prev_year_revenue,yoy_growth
 2020,2,Green,1547951.73,21570101.65,-92.82
