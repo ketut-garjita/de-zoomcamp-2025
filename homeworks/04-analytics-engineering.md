@@ -1,6 +1,6 @@
 ## Solution #1:
 
-1. Understanding the source() Function
+- Understanding the source() Function
    
      The source('raw_nyc_tripdata', 'ext_green_taxi') call references the sources.yaml file:
      ```
@@ -12,7 +12,7 @@
            - name: ext_green_taxi
       ```
      
-2. Resolving Environment Variables
+- Resolving Environment Variables
       The following environment variables are set in the dbt runtime environment:
       ```
       export DBT_BIGQUERY_PROJECT=myproject
@@ -21,12 +21,12 @@
       - env_var('DBT_BIGQUERY_PROJECT', 'dtc_zoomcamp_2025') → myproject
       - env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') → raw_nyc_tripdata
 
-3. Final Compilation
+- Final Compilation
       When dbt compiles {{ source('raw_nyc_tripdata', 'ext_green_taxi') }}, it expands to:
       ```
       myproject.raw_nyc_tripdata.ext_green_taxi
       ```
-4. Correct Answer
+- Correct Answer
       ```
       ✅ select * from myproject.raw_nyc_tripdata.ext_green_taxi
       ```
@@ -36,7 +36,7 @@
 
 To ensure that command-line arguments take precedence over environment variables, which take precedence over the default value, let's analyze each option carefully.
 
-1. Understanding var() and env_var() in dbt
+- Understanding var() and env_var() in dbt
    
       ```
       var("days_back", 30):
@@ -51,7 +51,7 @@ To ensure that command-line arguments take precedence over environment variables
       Default value: 30
       ```
 
-3. Evaluating the options
+- Evaluating the options
       ```
       ❌ Incorrect:
       Add ORDER BY pickup_datetime DESC and LIMIT {{ var("days_back", 30) }}
@@ -68,7 +68,7 @@ To ensure that command-line arguments take precedence over environment variables
       Default value (30)
       ```
       
-4. Final Answer:
+- Final Answer:
    ```
    ✅ Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
    ```
@@ -105,12 +105,12 @@ To determine which option does NOT apply for materializing fct_taxi_monthly_zone
    Runs all models in core/ and their dependencies.
    ✅ Valid.
 
-❌ Invalid Command (this will NOT materialize fct_taxi_monthly_zone_revenue):
-
-   dbt run --select models/staging/+
-   models/staging/+ selects all staging models and their children.
-   If fct_taxi_monthly_zone_revenue is in core/, this does NOT select it!
-   ❌ This does NOT apply for materializing fct_taxi_monthly_zone_revenue.
+   ❌ Invalid Command (this will NOT materialize fct_taxi_monthly_zone_revenue):
+   
+      dbt run --select models/staging/+
+      models/staging/+ selects all staging models and their children.
+      If fct_taxi_monthly_zone_revenue is in core/, this does NOT select it!
+      ❌ This does NOT apply for materializing fct_taxi_monthly_zone_revenue.
 
 - Final Answer:
 ❌ dbt run --select models/staging/+ does NOT apply.
@@ -136,7 +136,6 @@ Breaking Down the Macro Logic
     {%- endif -%}
 
 {%- endmacro %}
-
 
 - If model_type == 'core', it will use DBT_BIGQUERY_TARGET_DATASET.
 - If model_type is anything else, it will use DBT_BIGQUERY_STAGING_DATASET, but if it's not set, it will fall back to DBT_BIGQUERY_TARGET_DATASET.
@@ -168,10 +167,10 @@ staging is not core, so it behaves the same as stg, meaning it uses DBT_BIGQUERY
 Final Answer:
 ✅ The correct statements are:
 
-Setting a value for DBT_BIGQUERY_TARGET_DATASET env var is mandatory, or it'll fail to compile
-When using core, it materializes in the dataset defined in DBT_BIGQUERY_TARGET_DATASET
-When using stg, it materializes in the dataset defined in DBT_BIGQUERY_STAGING_DATASET, or defaults to DBT_BIGQUERY_TARGET_DATASET
-When using staging, it materializes in the dataset defined in DBT_BIGQUERY_STAGING_DATASET, or defaults to DBT_BIGQUERY_TARGET_DATASET
+- Setting a value for DBT_BIGQUERY_TARGET_DATASET env var is mandatory, or it'll fail to compile
+- When using core, it materializes in the dataset defined in DBT_BIGQUERY_TARGET_DATASET
+- When using stg, it materializes in the dataset defined in DBT_BIGQUERY_STAGING_DATASET, or defaults to DBT_BIGQUERY_TARGET_DATASET
+- When using staging, it materializes in the dataset defined in DBT_BIGQUERY_STAGING_DATASET, or defaults to DBT_BIGQUERY_TARGET_DATASET
 
 -------------------------------------------------------------------------------------
 
