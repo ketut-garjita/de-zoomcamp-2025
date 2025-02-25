@@ -280,6 +280,9 @@ Previewing node 'fct_taxi_trips_monthly_fare_p95':
 | Yellow       | 2020 |     4 |  32 | 26,5 | 19,5 |
 
 ```
+
+<img width="728" alt="image" src="https://github.com/user-attachments/assets/35bee7f4-7369-4825-8780-98de1bb253c1" />
+
 -------------------------------------------------------------------------------------
 
 
