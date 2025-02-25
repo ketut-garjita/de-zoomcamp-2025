@@ -350,10 +350,10 @@ SELECT pickup_zone, dropoff_zone
 FROM ranked_trips
 WHERE trip_rank = 2;
 
-pickup_zone	    dropoff_zone
-Yorkville East	Garment District
-Newark Airport	NV
-SoHo	Greenwich Village South
+pickup_zone	         dropoff_zone
+Yorkville East	      Garment District
+Newark Airport	      NV
+SoHo	               Greenwich Village South
 ```
 
 <img width="386" alt="image" src="https://github.com/user-attachments/assets/96767a81-a95d-454f-8757-a0e18397e472" />
