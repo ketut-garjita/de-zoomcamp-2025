@@ -351,6 +351,7 @@ FROM ranked_trips
 WHERE trip_rank = 2;
 
 pickup_zone         dropoff_zone
+-----------         ------------
 Yorkville East      Garment District
 Newark Airport      NV
 SoHo                Greenwich Village South
