@@ -14,7 +14,7 @@
          schema:   "{{ env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') }}"
          tables:
            - name: ext_green_taxi
-      ```
+     ```
      
 - Resolving Environment Variables
       The following environment variables are set in the dbt runtime environment:
