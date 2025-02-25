@@ -27,10 +27,12 @@
 
 - Final Compilation
       When dbt compiles {{ source('raw_nyc_tripdata', 'ext_green_taxi') }}, it expands to:
+  
       ```
       myproject.raw_nyc_tripdata.ext_green_taxi
       ```
 - Correct Answer
+  
       ```
       ✅ select * from myproject.raw_nyc_tripdata.ext_green_taxi
       ```
