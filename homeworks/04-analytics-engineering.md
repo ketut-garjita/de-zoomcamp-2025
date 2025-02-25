@@ -1,4 +1,4 @@
-**Solution #1:**
+SOLUTION #1:
 
 1. Understanding the source() Function
 The source('raw_nyc_tripdata', 'ext_green_taxi') call references the sources.yaml file:
@@ -29,7 +29,7 @@ myproject.raw_nyc_tripdata.ext_green_taxi
 
 -------------------------------------------------------------------------------------
 
-Solution #2:
+SOLUTION #2:
 
 To ensure that command-line arguments take precedence over environment variables, which take precedence over the default value, let's analyze each option carefully.
 
@@ -44,6 +44,7 @@ Priority order in dbt:
 Command-line argument: dbt run --vars '{"days_back": 7}'
 Environment variable: export DAYS_BACK=7
 Default value: 30
+
 2. Evaluating the options
 ❌ Incorrect:
 Add ORDER BY pickup_datetime DESC and LIMIT {{ var("days_back", 30) }}
@@ -58,12 +59,13 @@ This ensures the following precedence:
 Command-line argument (var("days_back"))
 Environment variable (env_var("DAYS_BACK"))
 Default value (30)
+
 3. Final Answer:
 ✅ Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
 
 -------------------------------------------------------------------------------------
 
-Solution #3:
+SOLUTION #3:
 
 To determine which option does NOT apply for materializing fct_taxi_monthly_zone_revenue, let's break this down step by step.
 
@@ -71,6 +73,7 @@ To determine which option does NOT apply for materializing fct_taxi_monthly_zone
 taxi_zone_lookup is a seed file (from .csv), meaning it's materialized with dbt seed.
 fct_taxi_monthly_zone_revenue depends on upstream models.
 For fct_taxi_monthly_zone_revenue to materialize, all its dependencies must also be built.
+
 2. Evaluating the dbt Commands
 ✅ Valid Commands (these will materialize fct_taxi_monthly_zone_revenue):
 dbt run
@@ -95,12 +98,13 @@ dbt run --select models/staging/+
 models/staging/+ selects all staging models and their children.
 If fct_taxi_monthly_zone_revenue is in core/, this does NOT select it!
 ❌ This does NOT apply for materializing fct_taxi_monthly_zone_revenue.
+
 3. Final Answer:
 ❌ dbt run --select models/staging/+ does NOT apply.
 
 -------------------------------------------------------------------------------------
 
-Solution #4;
+SOLUTION #4;
 
 Analyzing the Macro Behavior
 The macro resolve_schema_for(model_type) dynamically determines the schema (dataset) based on the model type.
@@ -158,7 +162,7 @@ When using staging, it materializes in the dataset defined in DBT_BIGQUERY_STAGI
 
 -------------------------------------------------------------------------------------
 
-Solution #5:
+SOLUTION #5:
 
 (dbt_env) dataeng@dataeng-virtual-machine:~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_quarterly_revenue.sql --debug
 13:24:40  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591414a70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a059168ba70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591291700>]}
@@ -302,7 +306,7 @@ year,quarter,service_type,revenue,prev_year_revenue,yoy_growth
 
 -------------------------------------------------------------------------------------
 
-Solution #6:
+SOLUTION #6:
 
 ~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_monthly_fare_p95 --debug
 13:01:54  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b65c26810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b676f5a60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b662e98b0>]}
@@ -424,7 +428,7 @@ Previewing node 'fct_taxi_trips_monthly_fare_p95':
 
 -------------------------------------------------------------------------------------
 
-Solution #7:
+SOLUTION #7:
 
 Step 1: Create a Staging Model (stg_fhv_trips.sql)
 Filter out records where dispatching_base_num is NULL:
