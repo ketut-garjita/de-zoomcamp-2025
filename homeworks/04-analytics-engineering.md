@@ -3,35 +3,36 @@
 1. Understanding the source() Function
    
      The source('raw_nyc_tripdata', 'ext_green_taxi') call references the sources.yaml file:
-     
+     ```
      sources:
        - name: raw_nyc_tripdata
          database: "{{ env_var('DBT_BIGQUERY_PROJECT', 'dtc_zoomcamp_2025') }}"
          schema:   "{{ env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') }}"
          tables:
            - name: ext_green_taxi
-
+      ```
+     
 2. Resolving Environment Variables
       The following environment variables are set in the dbt runtime environment:
-      
+      ```
       export DBT_BIGQUERY_PROJECT=myproject
       export DBT_BIGQUERY_DATASET=my_nyc_tripdata
-      
+      ```
       - env_var('DBT_BIGQUERY_PROJECT', 'dtc_zoomcamp_2025') → myproject
       - env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') → raw_nyc_tripdata
 
 3. Final Compilation
       When dbt compiles {{ source('raw_nyc_tripdata', 'ext_green_taxi') }}, it expands to:
-      
+      ```
       myproject.raw_nyc_tripdata.ext_green_taxi
-
+      ```
 4. Correct Answer
-   
+      ```
       ✅ select * from myproject.raw_nyc_tripdata.ext_green_taxi
-
+      ```
 -------------------------------------------------------------------------------------
 
-SOLUTION #2:
+## SOLUTION #2:
 
 To ensure that command-line arguments take precedence over environment variables, which take precedence over the default value, let's analyze each option carefully.
 
@@ -51,6 +52,7 @@ To ensure that command-line arguments take precedence over environment variables
       ```
 
 3. Evaluating the options
+      ```
       ❌ Incorrect:
       Add ORDER BY pickup_datetime DESC and LIMIT {{ var("days_back", 30) }}
       
@@ -64,10 +66,12 @@ To ensure that command-line arguments take precedence over environment variables
       Command-line argument (var("days_back"))
       Environment variable (env_var("DAYS_BACK"))
       Default value (30)
-
+      ```
+      
 4. Final Answer:
-✅ Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
-
+   ```
+   ✅ Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
+   ```
 -------------------------------------------------------------------------------------
 
 SOLUTION #3:
@@ -75,10 +79,11 @@ SOLUTION #3:
 To determine which option does NOT apply for materializing fct_taxi_monthly_zone_revenue, let's break this down step by step.
 
 1. Understanding dbt Materialization and Data Lineage
-taxi_zone_lookup is a seed file (from .csv), meaning it's materialized with dbt seed.
-fct_taxi_monthly_zone_revenue depends on upstream models.
-For fct_taxi_monthly_zone_revenue to materialize, all its dependencies must also be built.
-
+   ```
+   taxi_zone_lookup is a seed file (from .csv), meaning it's materialized with dbt seed.
+   fct_taxi_monthly_zone_revenue depends on upstream models.
+   For fct_taxi_monthly_zone_revenue to materialize, all its dependencies must also be built.
+   ```
 2. Evaluating the dbt Commands
 ✅ Valid Commands (these will materialize fct_taxi_monthly_zone_revenue):
 dbt run
