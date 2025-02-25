@@ -74,7 +74,7 @@ To ensure that command-line arguments take precedence over environment variables
    ```
 -------------------------------------------------------------------------------------
 
-Solution #3:
+## Solution #3:
 
 To determine which option does NOT apply for materializing fct_taxi_monthly_zone_revenue, let's break this down step by step.
 
@@ -117,7 +117,7 @@ To determine which option does NOT apply for materializing fct_taxi_monthly_zone
 
 -------------------------------------------------------------------------------------
 
-Solution #4;
+## Solution #4;
 
 Analyzing the Macro Behavior
 The macro resolve_schema_for(model_type) dynamically determines the schema (dataset) based on the model type.
@@ -174,8 +174,8 @@ Final Answer:
 
 -------------------------------------------------------------------------------------
 
-Solution #5:
-
+## Solution #5:
+```
 (dbt_env) dataeng@dataeng-virtual-machine:~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_quarterly_revenue.sql --debug
 13:24:40  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591414a70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a059168ba70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7a0591291700>]}
 13:24:40  Running with dbt=1.9.2
@@ -209,15 +209,9 @@ Solution #5:
 13:24:46  Writing injected SQL for node "model.mydbt.fct_taxi_trips_quarterly_revenue"
 13:24:46  Began executing node model.mydbt.fct_taxi_trips_quarterly_revenue
 13:24:47  Writing runtime sql for node "model.mydbt.fct_taxi_trips_quarterly_revenue"
-13:24:47  On model.mydbt.fct_taxi_trips_quarterly_revenue: /* {"app": "dbt", "dbt_version": "1.9.2", "profile_name": "mydbt", "target_name": "dev", "node_id": "model.mydbt.fct_taxi_trips_quarterly_revenue"} */
+13:24:47  On model.mydbt.fct_taxi_trips_quarterly_revenue: /* {"app": "dbt", "dbt_version": "1.9.2", "profile_name": "mydbt", "target_name": "dev", "node_id": "model.mydbt.fct_taxi_trips_quarterly_revenue"} */   
 
-  
-    
-
-    create or replace table `de-zoomcamp-2025--id`.`zoomcamp`.`fct_taxi_trips_quarterly_revenue`
-      
-    
-    
+    create or replace table `de-zoomcamp-2025--id`.`zoomcamp`.`fct_taxi_trips_quarterly_revenue`    
 
     OPTIONS()
     as (
@@ -315,8 +309,8 @@ year,quarter,service_type,revenue,prev_year_revenue,yoy_growth
 2020,3,Yellow,41845183.18,196150379.36,-78.67
 2020,4,Yellow,56866458.78,199618124.62,-71.51
 2020,1,Yellow,150767293.31,188266358.05,-19.92
+```
 
--------------------------------------------------------------------------------------
 
 Solution #6:
 
