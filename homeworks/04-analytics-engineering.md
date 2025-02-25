@@ -36,6 +36,7 @@
       ```
 -------------------------------------------------------------------------------------
 
+
 ## Solution #2:
 
 To ensure that command-line arguments take precedence over environment variables, which take precedence over the default value, let's analyze each option carefully.
@@ -77,6 +78,7 @@ To ensure that command-line arguments take precedence over environment variables
    ✅ Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
    ```
 -------------------------------------------------------------------------------------
+
 
 ## Solution #3:
 
@@ -120,6 +122,7 @@ To determine which option does NOT apply for materializing fct_taxi_monthly_zone
 ❌ dbt run --select models/staging/+ does NOT apply.
 
 -------------------------------------------------------------------------------------
+
 
 ## Solution #4:
 
@@ -178,6 +181,7 @@ Final Answer:
 
 -------------------------------------------------------------------------------------
 
+
 ## Solution #5:
 ```
 $ dbt run --select fct_taxi_trips_quarterly_revenue
@@ -227,139 +231,52 @@ SELECT *
 FROM yoy_growth
 WHERE year = 2020
 ORDER BY service_type, yoy_growth;
-
-year,quarter,service_type,revenue,prev_year_revenue,yoy_growth
-2020,2,Green,1547951.73,21570101.65,-92.82
-2020,3,Green,2369654.66,17706590.51,-86.62
-2020,4,Green,2449647.14,15729304.84,-84.43
-2020,1,Green,11526159.82,26438283.59,-56.4
-2020,2,Yellow,15671636.52,210218214.62,-92.55
-2020,3,Yellow,41845183.18,196150379.36,-78.67
-2020,4,Yellow,56866458.78,199618124.62,-71.51
-2020,1,Yellow,150767293.31,188266358.05,-19.92
 ```
 
 <img width="734" alt="image" src="https://github.com/user-attachments/assets/bab532f8-e182-46d2-81a5-6deb8cb9aaf8" />
 
 -------------------------------------------------------------------------------------
 
+
 ## Solution #6:
 ```
-~/projects/dbt/docker_setup/mydbt/models/core$ dbt run --select fct_taxi_trips_monthly_fare_p95 --debug
-13:01:54  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b65c26810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b676f5a60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b662e98b0>]}
-13:01:54  Running with dbt=1.9.2
-13:01:54  running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/home/dataeng/.dbt', 'version_check': 'True', 'fail_fast': 'False', 'log_path': '/home/dataeng/projects/dbt/docker_setup/mydbt/logs', 'warn_error': 'None', 'debug': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'False', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'static_parser': 'True', 'invocation_command': 'dbt run --select fct_taxi_trips_monthly_fare_p95 --debug', 'introspect': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True'}
-13:02:00  Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '82f448ab-d559-491d-919c-098b921ff3a3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b45a85d90>]}
-13:02:01  Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '82f448ab-d559-491d-919c-098b921ff3a3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b45b1e6c0>]}
-13:02:01  Registered adapter: bigquery=1.9.1
-13:02:03  checksum: 12b12750b70de726cfd89136b8e24afc3f3e77597a97bff40ab7e5f9b39d5e18, vars: {}, profile: , target: , version: 1.9.2
-13:02:03  Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
-13:02:03  Partial parsing: updated file: mydbt://models/core/fct_taxi_trips_monthly_fare_p95.sql
-13:02:05  Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '82f448ab-d559-491d-919c-098b921ff3a3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b452e7230>]}
-13:02:05  Wrote artifact WritableManifest to /home/dataeng/projects/dbt/docker_setup/mydbt/target/manifest.json
-13:02:05  Wrote artifact SemanticManifest to /home/dataeng/projects/dbt/docker_setup/mydbt/target/semantic_manifest.json
-13:02:05  Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '82f448ab-d559-491d-919c-098b921ff3a3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b4529d700>]}
-13:02:05  Found 6 models, 1 analysis, 1 seed, 11 data tests, 2 sources, 628 macros
-13:02:05  Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '82f448ab-d559-491d-919c-098b921ff3a3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b458f9ac0>]}
-13:02:05  
-13:02:05  Concurrency: 1 threads (target='dev')
-13:02:05  
-13:02:05  Acquiring new bigquery connection 'master'
-13:02:05  Acquiring new bigquery connection 'list_de-zoomcamp-2025--id'
-13:02:05  Opening a new connection, currently in state init
-13:02:06  Re-using an available connection from the pool (formerly list_de-zoomcamp-2025--id, now list_de-zoomcamp-2025--id_zoomcamp)
-13:02:06  Opening a new connection, currently in state closed
-13:02:06  Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '82f448ab-d559-491d-919c-098b921ff3a3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b454b3d70>]}
-13:02:06  Opening a new connection, currently in state init
-13:02:06  Began running node model.mydbt.fct_taxi_trips_monthly_fare_p95
-13:02:06  1 of 1 START sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 .......... [RUN]
-13:02:06  Re-using an available connection from the pool (formerly list_de-zoomcamp-2025--id_zoomcamp, now model.mydbt.fct_taxi_trips_monthly_fare_p95)
-13:02:06  Began compiling node model.mydbt.fct_taxi_trips_monthly_fare_p95
-13:02:06  Writing injected SQL for node "model.mydbt.fct_taxi_trips_monthly_fare_p95"
-13:02:06  Began executing node model.mydbt.fct_taxi_trips_monthly_fare_p95
-13:02:07  Writing runtime sql for node "model.mydbt.fct_taxi_trips_monthly_fare_p95"
-13:02:07  On model.mydbt.fct_taxi_trips_monthly_fare_p95: /* {"app": "dbt", "dbt_version": "1.9.2", "profile_name": "mydbt", "target_name": "dev", "node_id": "model.mydbt.fct_taxi_trips_monthly_fare_p95"} */    
+$  dbt run --select fct_taxi_trips_monthly_fare_p95
+10:25:36  Running with dbt=1.9.2
+10:25:39  Registered adapter: bigquery=1.9.1
+10:25:41  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
+10:25:41  
+10:25:41  Concurrency: 1 threads (target='dev')
+10:25:41  
+10:25:42  1 of 1 START sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 .......... [RUN]
+10:25:46  1 of 1 OK created sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 ..... [CREATE TABLE (2.0 rows, 3.4 GiB processed) in 3.48s]
+10:25:46  
+10:25:46  Finished running 1 table model in 0 hours 0 minutes and 4.81 seconds (4.81s).
+10:25:46  
+10:25:46  Completed successfully
+10:25:46  
+10:25:46  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
+```
 
-    create or replace table `de-zoomcamp-2025--id`.`zoomcamp`.`fct_taxi_trips_monthly_fare_p95`    
-
-    OPTIONS()
-    as (
-      WITH valid_trips AS (
-    SELECT
-        service_type,
-        EXTRACT(YEAR FROM pickup_datetime) AS year,
-        EXTRACT(MONTH FROM pickup_datetime) AS month,
-        fare_amount
-    FROM  `de-zoomcamp-2025--id`.`zoomcamp`.`fact_trips` 
-    WHERE 
-        fare_amount > 0 
-        AND trip_distance > 0 
-        AND payment_type_description IN ('Cash', 'Credit Card')
-),
-
-percentile_fares AS (
-    SELECT
-        service_type,
-        year,
-        month,
-        APPROX_QUANTILES(fare_amount, 100)[SAFE_ORDINAL(97)] AS p97,
-        APPROX_QUANTILES(fare_amount, 100)[SAFE_ORDINAL(95)] AS p95,
-        APPROX_QUANTILES(fare_amount, 100)[SAFE_ORDINAL(90)] AS p90
-    FROM valid_trips
-    GROUP BY service_type, year, month
-)
-
-SELECT * FROM percentile_fares
-WHERE year = 2020 AND month = 4
-ORDER BY service_type
-    );
-  
-13:02:07  Opening a new connection, currently in state closed
-13:02:07  BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-zoomcamp-2025--id&j=bq:asia-southeast2:cc07ea48-09b0-4f50-8308-f8898bae1f5a&page=queryresults
-13:02:11  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '82f448ab-d559-491d-919c-098b921ff3a3', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b459d41d0>]}
-13:02:11  1 of 1 OK created sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 ..... [CREATE TABLE (2.0 rows, 3.4 GiB processed) in 4.53s]
-13:02:11  Finished running node model.mydbt.fct_taxi_trips_monthly_fare_p95
-13:02:11  Opening a new connection, currently in state closed
-13:02:11  Connection 'master' was properly closed.
-13:02:11  Connection 'model.mydbt.fct_taxi_trips_monthly_fare_p95' was properly closed.
-13:02:11  
-13:02:11  Finished running 1 table model in 0 hours 0 minutes and 5.74 seconds (5.74s).
-13:02:11  Command end result
-13:02:11  Wrote artifact WritableManifest to /home/dataeng/projects/dbt/docker_setup/mydbt/target/manifest.json
-13:02:11  Wrote artifact SemanticManifest to /home/dataeng/projects/dbt/docker_setup/mydbt/target/semantic_manifest.json
-13:02:11  Wrote artifact RunExecutionResult to /home/dataeng/projects/dbt/docker_setup/mydbt/target/run_results.json
-13:02:11  
-13:02:11  Completed successfully
-13:02:11  
-13:02:11  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
-13:02:11  Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 17.027796, "process_in_blocks": "2160", "process_kernel_time": 6.760254, "process_mem_max_rss": "221920", "process_out_blocks": "4472", "process_user_time": 13.061805}
-13:02:11  Command `dbt run` succeeded at 20:02:11.566426 after 17.03 seconds
-13:02:11  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b65e98230>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b65977890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x700b45615e20>]}
-13:02:11  Flushing usage events
-13:02:13  An error was encountered while trying to flush usage events
-(dbt_env) dataeng@dataeng-virtual-machine:~/projects/dbt/docker_setup/mydbt/models/core$ dbt compile
-dbt show --select fct_taxi_trips_monthly_fare_p95
-13:03:55  Running with dbt=1.9.2
-13:04:00  Registered adapter: bigquery=1.9.1
-13:04:02  Found 6 models, 1 analysis, 1 seed, 11 data tests, 2 sources, 628 macros
-13:04:02  
-13:04:02  Concurrency: 1 threads (target='dev')
-13:04:02  
-13:04:12  Running with dbt=1.9.2
-13:04:19  Registered adapter: bigquery=1.9.1
-13:04:22  Found 6 models, 1 analysis, 1 seed, 11 data tests, 2 sources, 628 macros
-13:04:22  
-13:04:22  Concurrency: 1 threads (target='dev')
-13:04:22  
+```
+$ dbt show --select fct_taxi_trips_monthly_fare_p95
+10:27:51  Running with dbt=1.9.2
+10:27:54  Registered adapter: bigquery=1.9.1
+10:27:56  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
+10:27:56  
+10:27:56  Concurrency: 1 threads (target='dev')
+10:27:56  
 Previewing node 'fct_taxi_trips_monthly_fare_p95':
 | service_type | year | month | p97 |  p95 |  p90 |
 | ------------ | ---- | ----- | --- | ---- | ---- |
-| Green        | 2020 |     4 |  25 | 22,0 | 17,5 |
-| Yellow       | 2020 |     4 |  29 | 24,5 | 18,5 |
+| Green        | 2020 |     4 |  28 | 23,0 | 18,0 |
+| Yellow       | 2020 |     4 |  32 | 26,5 | 19,5 |
+
 ```
 -------------------------------------------------------------------------------------
 
+
 ## Solution #7:
+
 ```
 Step 1: Create a Staging Model (stg_fhv_trips.sql)
 Filter out records where dispatching_base_num is NULL:
@@ -438,7 +355,11 @@ Yorkville East	Garment District
 Newark Airport	NV
 SoHo	Greenwich Village South
 ```
+
+<img width="386" alt="image" src="https://github.com/user-attachments/assets/96767a81-a95d-454f-8757-a0e18397e472" />
+
 -------------------------------------------------------------------------------------
 
+<img width="1128" alt="image" src="https://github.com/user-attachments/assets/e8a20514-f208-4a9d-8a6c-076ce27843ec" />
 
 
