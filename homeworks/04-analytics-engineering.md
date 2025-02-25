@@ -21,12 +21,12 @@
       - env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') → raw_nyc_tripdata
 
 3. Final Compilation
-When dbt compiles {{ source('raw_nyc_tripdata', 'ext_green_taxi') }}, it expands to:
-
-myproject.raw_nyc_tripdata.ext_green_taxi
+      When dbt compiles {{ source('raw_nyc_tripdata', 'ext_green_taxi') }}, it expands to:
+      
+      myproject.raw_nyc_tripdata.ext_green_taxi
 
 4. Correct Answer
-✅ select * from myproject.raw_nyc_tripdata.ext_green_taxi
+      ✅ select * from myproject.raw_nyc_tripdata.ext_green_taxi
 
 -------------------------------------------------------------------------------------
 
