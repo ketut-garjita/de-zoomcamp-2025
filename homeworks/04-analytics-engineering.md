@@ -1,5 +1,4 @@
 ## SOLUTION #1:
-
 1. Understanding the source() Function
    
      The source('raw_nyc_tripdata', 'ext_green_taxi') call references the sources.yaml file:
