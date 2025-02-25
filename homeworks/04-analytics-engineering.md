@@ -375,7 +375,7 @@ SoHo                Greenwich Village South
 <img width="572" alt="image" src="https://github.com/user-attachments/assets/31df21b8-b518-4d92-8edc-643a6c5896e1" />
 
 ```
-dbt docs server
+dbt docs serve
 ```
 
 <img width="1128" alt="image" src="https://github.com/user-attachments/assets/e8a20514-f208-4a9d-8a6c-076ce27843ec" />
