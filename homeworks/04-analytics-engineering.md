@@ -228,8 +228,6 @@ FROM yoy_growth
 WHERE year = 2020
 ORDER BY service_type, yoy_growth;
 
-<img width="734" alt="image" src="https://github.com/user-attachments/assets/bab532f8-e182-46d2-81a5-6deb8cb9aaf8" />
-
 year,quarter,service_type,revenue,prev_year_revenue,yoy_growth
 2020,2,Green,1547951.73,21570101.65,-92.82
 2020,3,Green,2369654.66,17706590.51,-86.62
@@ -240,6 +238,9 @@ year,quarter,service_type,revenue,prev_year_revenue,yoy_growth
 2020,4,Yellow,56866458.78,199618124.62,-71.51
 2020,1,Yellow,150767293.31,188266358.05,-19.92
 ```
+
+<img width="734" alt="image" src="https://github.com/user-attachments/assets/bab532f8-e182-46d2-81a5-6deb8cb9aaf8" />
+
 -------------------------------------------------------------------------------------
 
 ## Solution #6:
