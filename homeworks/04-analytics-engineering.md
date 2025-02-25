@@ -127,7 +127,7 @@ To determine which option does NOT apply for materializing fct_taxi_monthly_zone
 
 - Final Answer:
   
-❌ dbt run --select models/staging/+ does NOT apply.
+   ❌ dbt run --select models/staging/+ does NOT apply.
 
 -------------------------------------------------------------------------------------
 
