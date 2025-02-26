@@ -38,3 +38,10 @@
   - [Questions](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2025/04-analytics-engineering/homework.md)
   - [Solution & Answer](https://github.com/ketut-garjita/de-zoomcamp-2025/blob/main/homeworks/04-analytics-engineering.md)
   - [Form for Submitting](https://courses.datatalks.club/de-zoomcamp-2025/homework/hw4)
+
+### Module 5 : Batch Processing
+- [Resource](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/05-batch)
+- Howework
+  - [Questions](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2025/05-batch/homework.md)
+  - [Solution & Answer](https://github.com/ketut-garjita/de-zoomcamp-2025/blob/main/homeworks/05-batch-processing.md)
+  - [Form for Submitting](https://courses.datatalks.club/de-zoomcamp-2025/homework/hw5)
