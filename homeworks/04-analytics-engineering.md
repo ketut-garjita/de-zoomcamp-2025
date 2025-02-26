@@ -75,6 +75,7 @@ To ensure that command-line arguments take precedence over environment variables
    This prioritizes the environment variable but does not check for a command-line argument.
    ✅ Correct:
    Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
+   
    This ensures the following precedence:
    Command-line argument (var("days_back"))
    Environment variable (env_var("DAYS_BACK"))
