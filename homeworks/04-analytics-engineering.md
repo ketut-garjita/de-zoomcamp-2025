@@ -252,31 +252,28 @@ ORDER BY service_type, yoy_growth;
 ## Solution #6:
 ```
 $  dbt run --select fct_taxi_trips_monthly_fare_p95
-10:25:36  Running with dbt=1.9.2
-10:25:39  Registered adapter: bigquery=1.9.1
-10:25:41  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
-10:25:41  
-10:25:41  Concurrency: 1 threads (target='dev')
-10:25:41  
-10:25:42  1 of 1 START sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 .......... [RUN]
-10:25:46  1 of 1 OK created sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 ..... [CREATE TABLE (2.0 rows, 3.4 GiB processed) in 3.48s]
-10:25:46  
-10:25:46  Finished running 1 table model in 0 hours 0 minutes and 4.81 seconds (4.81s).
-10:25:46  
-10:25:46  Completed successfully
-10:25:46  
-10:25:46  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
+Running with dbt=1.9.2
+14:06:07  Registered adapter: bigquery=1.9.1
+14:06:09  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
+14:06:09  
+14:06:09  Concurrency: 1 threads (target='dev')
+14:06:09  
+14:06:11  1 of 1 START sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 .......... [RUN]
+14:06:16  1 of 1 OK created sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 ..... [CREATE TABLE (17.8m rows, 3.4 GiB processed) in 5.78s]
+14:06:17  
+14:06:17  Finished running 1 table model in 0 hours 0 minutes and 7.01 seconds (7.01s).
+14:06:17  
+14:06:17  Completed successfully
+14:06:17  
+14:06:17  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
 ```
 
 ```
-$ dbt show --select fct_taxi_trips_monthly_fare_p95
-10:27:51  Running with dbt=1.9.2
-10:27:54  Registered adapter: bigquery=1.9.1
-10:27:56  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
-10:27:56  
-10:27:56  Concurrency: 1 threads (target='dev')
-10:27:56  
-Previewing node 'fct_taxi_trips_monthly_fare_p95':
+SELECT service_type, year, month, p97, p95, p90
+FROM `de-zoomcamp-2025--id.zoomcamp.fct_taxi_trips_monthly_fare_p95`
+WHERE year = 2020 AND month = 4
+GROUP BY service_type, year, month, p97, p95, p90;
+
 | service_type | year | month | p97 |  p95 |  p90 |
 | ------------ | ---- | ----- | --- | ---- | ---- |
 | Green        | 2020 |     4 |  28 | 23,0 | 18,0 |
