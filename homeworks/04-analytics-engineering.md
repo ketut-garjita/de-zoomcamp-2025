@@ -286,6 +286,8 @@ ORDER BY service_type
 
 ```
 $ dbt run --select fct_taxi_trips_monthly_fare_p95
+```
+```
 23:34:56  Running with dbt=1.9.2
 23:34:59  Registered adapter: bigquery=1.9.1
 23:35:01  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
@@ -304,6 +306,8 @@ $ dbt run --select fct_taxi_trips_monthly_fare_p95
 
 ```
 $ dbt show --select fct_taxi_trips_monthly_fare_p95
+```
+```
 23:38:56  Running with dbt=1.9.2
 23:38:59  Registered adapter: bigquery=1.9.1
 23:39:01  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
@@ -315,8 +319,6 @@ Previewing node 'fct_taxi_trips_monthly_fare_p95':
 | ------------ | ---- | ----- | ---- | ---- | --- |
 | Green        | 2020 |     4 | 50,5 | 39,5 |  25 |
 | Yellow       | 2020 |     4 | 28,5 | 24,0 |  18 |
-
-
 ```
 -------------------------------------------------------------------------------------
 
