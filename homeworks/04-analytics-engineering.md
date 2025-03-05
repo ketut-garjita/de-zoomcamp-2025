@@ -250,39 +250,74 @@ ORDER BY service_type, yoy_growth;
 
 
 ## Solution #6:
-```
-$  dbt run --select fct_taxi_trips_monthly_fare_p95
-Running with dbt=1.9.2
-14:06:07  Registered adapter: bigquery=1.9.1
-14:06:09  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
-14:06:09  
-14:06:09  Concurrency: 1 threads (target='dev')
-14:06:09  
-14:06:11  1 of 1 START sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 .......... [RUN]
-14:06:16  1 of 1 OK created sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 ..... [CREATE TABLE (17.8m rows, 3.4 GiB processed) in 5.78s]
-14:06:17  
-14:06:17  Finished running 1 table model in 0 hours 0 minutes and 7.01 seconds (7.01s).
-14:06:17  
-14:06:17  Completed successfully
-14:06:17  
-14:06:17  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
-```
+
+**fct_taxi_trips_monthly_fare_p95.sql**
 
 ```
-SELECT service_type, year, month, p97, p95, p90
-FROM `de-zoomcamp-2025--id.zoomcamp.fct_taxi_trips_monthly_fare_p95`
+WITH valid_trips AS (
+    SELECT
+        service_type,
+        EXTRACT(YEAR FROM pickup_datetime) AS year,
+        EXTRACT(MONTH FROM pickup_datetime) AS month,
+        fare_amount
+    FROM `de-zoomcamp-2025--id.zoomcamp.fact_trips`
+    WHERE 
+        fare_amount > 0 
+        AND trip_distance > 0 
+        AND lower(payment_type_description) IN ('cash', 'credit card')
+),
+
+percentile_fares AS (
+    SELECT
+        service_type,
+        year,
+        month,
+        APPROX_QUANTILES(fare_amount, 100)[SAFE_ORDINAL(97)] AS p97,
+        APPROX_QUANTILES(fare_amount, 100)[SAFE_ORDINAL(95)] AS p95,
+        APPROX_QUANTILES(fare_amount, 100)[SAFE_ORDINAL(90)] AS p90
+    FROM valid_trips
+    GROUP BY service_type, year, month
+)
+
+SELECT * FROM percentile_fares
 WHERE year = 2020 AND month = 4
-GROUP BY service_type, year, month, p97, p95, p90;
-
-| service_type | year | month | p97 |  p95 |  p90 |
-| ------------ | ---- | ----- | --- | ---- | ---- |
-| Green        | 2020 |     4 |  28 | 23,0 | 18,0 |
-| Yellow       | 2020 |     4 |  32 | 26,5 | 19,5 |
-
+ORDER BY service_type
 ```
 
-<img width="728" alt="image" src="https://github.com/user-attachments/assets/35bee7f4-7369-4825-8780-98de1bb253c1" />
+```
+$ dbt run --select fct_taxi_trips_monthly_fare_p95
+23:34:56  Running with dbt=1.9.2
+23:34:59  Registered adapter: bigquery=1.9.1
+23:35:01  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
+23:35:01  
+23:35:01  Concurrency: 1 threads (target='dev')
+23:35:01  
+23:35:04  1 of 1 START sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 .......... [RUN]
+23:35:09  1 of 1 OK created sql table model zoomcamp.fct_taxi_trips_monthly_fare_p95 ..... [CREATE TABLE (2.0 rows, 3.4 GiB processed) in 5.45s]
+23:35:09  
+23:35:09  Finished running 1 table model in 0 hours 0 minutes and 7.88 seconds (7.88s).
+23:35:09  
+23:35:09  Completed successfully
+23:35:09  
+23:35:09  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
+```
 
+```
+$ dbt show --select fct_taxi_trips_monthly_fare_p95
+23:38:56  Running with dbt=1.9.2
+23:38:59  Registered adapter: bigquery=1.9.1
+23:39:01  Found 10 models, 1 seed, 11 data tests, 3 sources, 628 macros
+23:39:01  
+23:39:01  Concurrency: 1 threads (target='dev')
+23:39:01  
+Previewing node 'fct_taxi_trips_monthly_fare_p95':
+| service_type | year | month |  p97 |  p95 | p90 |
+| ------------ | ---- | ----- | ---- | ---- | --- |
+| Green        | 2020 |     4 | 50,5 | 39,5 |  25 |
+| Yellow       | 2020 |     4 | 28,5 | 24,0 |  18 |
+
+
+```
 -------------------------------------------------------------------------------------
 
 
