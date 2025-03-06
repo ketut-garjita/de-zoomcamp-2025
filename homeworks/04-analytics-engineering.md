@@ -37,10 +37,10 @@
   myproject.raw_nyc_tripdata.ext_green_taxi
   ```
   
-- Correct Answer  
+✅ Correct Answer  
 
    ```
-   ✅ select * from myproject.raw_nyc_tripdata.ext_green_taxi
+   select * from myproject.raw_nyc_tripdata.ext_green_taxi
    ```
 -------------------------------------------------------------------------------------
 
@@ -81,11 +81,11 @@ To ensure that command-line arguments take precedence over environment variables
    Environment variable (env_var("DAYS_BACK"))
    Default value (30)
    ```
-      
-- Final Answer:
+
+✅ Final Answer:
   
    ```
-   ✅ Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
+   Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY
    ```
 -------------------------------------------------------------------------------------
 
@@ -128,7 +128,7 @@ To determine which option does NOT apply for materializing fct_taxi_monthly_zone
    If fct_taxi_monthly_zone_revenue is in core/, this does NOT select it!
    ❌ This does NOT apply for materializing fct_taxi_monthly_zone_revenue.
 
-- Final Answer:
+✅ Final Answer:
   
    ❌ dbt run --select models/staging/+ does NOT apply.
 
@@ -182,8 +182,9 @@ When using staging, it materializes in the dataset defined in DBT_BIGQUERY_STAGI
 staging is not core, so it behaves the same as stg, meaning it uses DBT_BIGQUERY_STAGING_DATASET or falls back.
 
 
-Final Answer:
-✅ The correct statements are:
+✅ Final Answer:
+
+The correct statements are:
 
 - Setting a value for DBT_BIGQUERY_TARGET_DATASET env var is mandatory, or it'll fail to compile
 - When using core, it materializes in the dataset defined in DBT_BIGQUERY_TARGET_DATASET
@@ -245,6 +246,10 @@ ORDER BY service_type, yoy_growth;
 ```
 
 <img width="734" alt="image" src="https://github.com/user-attachments/assets/bab532f8-e182-46d2-81a5-6deb8cb9aaf8" />
+
+✅ Corerct Answer: 
+
+green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q1, worst: 2020/Q2}
 
 -------------------------------------------------------------------------------------
 
@@ -320,6 +325,11 @@ Previewing node 'fct_taxi_trips_monthly_fare_p95':
 | Green        | 2020 |     4 | 50,5 | 39,5 |  25 |
 | Yellow       | 2020 |     4 | 28,5 | 24,0 |  18 |
 ```
+
+✅ Correct Answer:
+
+green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 31.5, p95: 25.5, p90: 19.0}
+
 -------------------------------------------------------------------------------------
 
 
@@ -417,4 +427,6 @@ dbt docs serve
 
 <img width="1128" alt="image" src="https://github.com/user-attachments/assets/e8a20514-f208-4a9d-8a6c-076ce27843ec" />
 
+✅ Correct Answer:
 
+LaGuardia Airport, Chinatown, Garment District
