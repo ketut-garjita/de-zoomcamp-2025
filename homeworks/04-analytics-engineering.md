@@ -247,7 +247,7 @@ ORDER BY service_type, yoy_growth;
 
 <img width="734" alt="image" src="https://github.com/user-attachments/assets/bab532f8-e182-46d2-81a5-6deb8cb9aaf8" />
 
-✅ Corerct Answer: 
+✅ Correct Answer: 
 
 green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q1, worst: 2020/Q2}
 
