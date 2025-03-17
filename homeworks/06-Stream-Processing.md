@@ -252,4 +252,5 @@ ORDER BY trip_distance DESC
 LIMIT 1;
 ```
 "event_hour"	"lpep_pickup_datetime"	"lpep_dropoff_datetime"	"pulocationid"	"dolocationid"	"passenger_count"	"trip_distance"	"tip_amount"	"num_hits"
+
 "2025-03-17 12:37:04.783"	"2019-10-11 20:34:21"	"2019-10-11 22:40:41"	126	265	5	95.77999877929688	0	
