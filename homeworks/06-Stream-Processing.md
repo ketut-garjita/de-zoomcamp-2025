@@ -202,7 +202,7 @@ Now we have the data in the Kafka stream. It's time to process it.
 
 ### Solution
 
-load_taxi_data.py
+producer: load_taxi_data.py
 
 ```
 import csv
@@ -235,7 +235,7 @@ if __name__ == "__main__":
     main()
 ```
 
-session_job.py
+consumer: session_job.py
 ```
 from pyflink.datastream import StreamExecutionEnvironment
 from pyflink.table import EnvironmentSettings, DataTypes, TableEnvironment, StreamTableEnvironment
