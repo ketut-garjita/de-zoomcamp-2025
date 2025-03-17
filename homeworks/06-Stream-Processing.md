@@ -200,5 +200,56 @@ Now we have the data in the Kafka stream. It's time to process it.
 - Use lpep_dropoff_datetime time as your watermark with a 5 second tolerance
 - Which pickup and drop off locations have the longest unbroken streak of taxi trips?
 
+### Solution
+
+load_taxi_data.py
+
+```
+import csv
+import json
+from kafka import KafkaProducer
+
+def main():
+    # Create a Kafka producer
+    producer = KafkaProducer(
+        bootstrap_servers='redpanda-1:29092',
+        value_serializer=lambda v: json.dumps(v).encode('utf-8')
+    )
+
+    csv_file = '/opt/src/producers/data/green_tripdata_2019-10.csv'  # change to your CSV file path if needed
+
+    with open(csv_file, 'r', newline='', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            # Each row will be a dictionary keyed by the CSV headers
+            # Send data to Kafka topic "green-data"
+            producer.send('green-data', value=row)
+
+    # Make sure any remaining messages are delivered
+    producer.flush()
+    producer.close()
 
 
+if __name__ == "__main__":
+    main()
+```
+
+Execute producer: 
+```
+root@jobmanager:/opt/flink# flink run -py /opt/src/producers/load_taxi_data.py --pyFiles /opt/src -d
+```
+
+Excute consumer:
+```
+root@jobmanager:/opt/flink# flink run -py /opt/src/job/session_correct.py --pyFiles /opt/src -d
+```
+
+Query the highest trip_distance
+```
+SELECT * FROM aggregated_green_trips
+ORDER BY trip_distance DESC
+LIMIT 1;
+```
+"event_hour"	"lpep_pickup_datetime"	"lpep_dropoff_datetime"	"pulocationid"	"dolocationid"	"passenger_count"	"trip_distance"	"tip_amount"	"num_hits"
+"2025-03-17 12:37:04.783"	"2019-10-11 20:34:21"	"2019-10-11 22:40:41"	126	265	5	95.77999877929688	0	
