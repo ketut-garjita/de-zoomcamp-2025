@@ -235,6 +235,131 @@ if __name__ == "__main__":
     main()
 ```
 
+session_job.py
+```
+from pyflink.datastream import StreamExecutionEnvironment
+from pyflink.table import EnvironmentSettings, DataTypes, TableEnvironment, StreamTableEnvironment
+
+def create_events_aggregated_sink(t_env):
+    table_name = 'aggregated_green_trips'
+    sink_ddl = f"""
+        CREATE TABLE IF NOT EXISTS {table_name} (
+            event_hour TIMESTAMP(3),
+            lpep_pickup_datetime TIMESTAMP(3),
+            lpep_dropoff_datetime TIMESTAMP(3),
+            PULocationID INT,
+            DOLocationID INT,
+            passenger_count INT,
+            trip_distance FLOAT,
+            tip_amount FLOAT,
+            num_hits BIGINT,
+            PRIMARY KEY (event_hour, lpep_dropoff_datetime) NOT ENFORCED
+        ) WITH (
+            'connector' = 'jdbc',
+            'url' = 'jdbc:postgresql://postgres:5432/postgres',
+            'table-name' = '{table_name}',
+            'username' = 'postgres',
+            'password' = 'postgres',
+            'driver' = 'org.postgresql.Driver'
+        );
+    """
+    t_env.execute_sql(sink_ddl)
+    return table_name
+
+def create_events_source_kafka(t_env):
+    table_name = "events"
+    source_ddl = f"""
+        CREATE TABLE {table_name} (
+            event_hour TIMESTAMP(3),
+            lpep_pickup_datetime TIMESTAMP(3),
+            lpep_dropoff_datetime TIMESTAMP(3),
+            PULocationID INT,
+            DOLocationID INT,
+            passenger_count INT,
+            trip_distance FLOAT,
+            tip_amount FLOAT,
+            num_hits BIGINT,
+            event_watermark AS lpep_dropoff_datetime,
+            WATERMARK FOR event_watermark AS event_watermark - INTERVAL '5' SECOND
+        ) WITH (
+            'connector' = 'kafka',
+            'properties.bootstrap.servers' = 'redpanda-1:29092',
+            'topic' = 'green-data',
+            'scan.startup.mode' = 'earliest-offset',
+            'properties.auto.offset.reset' = 'earliest',
+            'format' = 'json'
+        );
+    """
+    t_env.execute_sql(source_ddl)
+    return table_name
+
+def log_aggregation():
+    # Set up the execution environment
+    env = StreamExecutionEnvironment.get_execution_environment()
+    env.enable_checkpointing(10 * 1000)
+    env.set_parallelism(3)
+
+    # Set up the environment settings
+    env_settings = EnvironmentSettings.new_instance().in_streaming_mode().build()
+    
+    # Create the TableEnvironment
+    t_env = StreamTableEnvironment.create(env, environment_settings=env_settings)
+
+    try:
+        # Create Kafka table
+        source_table = create_events_source_kafka(t_env)
+        aggregated_table = create_events_aggregated_sink(t_env)
+
+        # Insert data into sink table
+        insert_query = f"""
+            INSERT INTO {aggregated_table}
+            SELECT 
+                CASE 
+                    WHEN event_hour IS NULL THEN CURRENT_TIMESTAMP 
+                    ELSE event_hour 
+                END AS event_hour,
+                lpep_pickup_datetime,
+                lpep_dropoff_datetime,
+                PULocationID,
+                DOLocationID,
+                passenger_count,
+                trip_distance,
+                tip_amount,
+                num_hits
+            FROM TABLE(
+                TUMBLE(TABLE {source_table}, DESCRIPTOR(event_watermark), INTERVAL '5' MINUTE)
+            )
+            GROUP BY 
+                event_hour,
+                lpep_pickup_datetime,
+                lpep_dropoff_datetime,
+                PULocationID,
+                DOLocationID,
+                passenger_count,
+                trip_distance,
+                tip_amount,
+                num_hits;
+        """
+        t_env.execute_sql(insert_query).wait()
+
+        # Query the highest trip_distance
+        result = t_env.execute_sql(f"""
+            SELECT * FROM {aggregated_table}
+            ORDER BY trip_distance DESC
+            LIMIT 1
+        """)
+
+        print("Top Trip Distance Record:")
+        for row in result.collect():
+            print(row)
+
+    except Exception as e:
+        print("Writing records from Kafka to JDBC failed:", str(e))
+
+if __name__ == '__main__':
+    log_aggregation()
+```
+
 Execute producer: 
 ```
 root@jobmanager:/opt/flink# flink run -py /opt/src/producers/load_taxi_data.py --pyFiles /opt/src -d
@@ -242,7 +367,7 @@ root@jobmanager:/opt/flink# flink run -py /opt/src/producers/load_taxi_data.py -
 
 Excute consumer:
 ```
-root@jobmanager:/opt/flink# flink run -py /opt/src/job/session_correct.py --pyFiles /opt/src -d
+root@jobmanager:/opt/flink# flink run -py /opt/src/job/session_job.py --pyFiles /opt/src -d
 ```
 
 Query the highest trip_distance
