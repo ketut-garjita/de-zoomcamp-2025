@@ -72,6 +72,7 @@ Go version:  go1.23.1
 Redpanda Cluster
   node-1  v24.2.18 - f9a22d443087b824803638623d6b7492ec8221f9
 ```
+
 ---
 ## Question 2. Creating a topic
 
@@ -89,6 +90,7 @@ TOPIC        STATUS
 green-trips  OK
 ```
 
+---
 ## Question 3. Connecting to the Kafka server
 
 We need to make sure we can connect to the server, so later we can send some data to its topics
@@ -129,7 +131,7 @@ Provided that you can connect to the server, what's the output of the last comma
 
 **The output of tle last command is True**
 
-
+---
 ## Question 4: Sending the Trip Data
 Now we need to send the data to the green-trips topic
 
@@ -190,7 +192,7 @@ print(f"Time taken to send all messages and flush: {took:.2f} seconds")
 
 **Time taken to send all messages and flush: 67.15 seconds**
 
-
+---
 ## Question 5: Build a Sessionization Window (2 points)
 Now we have the data in the Kafka stream. It's time to process it.
 
