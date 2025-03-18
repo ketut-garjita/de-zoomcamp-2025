@@ -240,6 +240,7 @@ consumer: session_job.py
 from pyflink.datastream import StreamExecutionEnvironment
 from pyflink.table import EnvironmentSettings, DataTypes, TableEnvironment, StreamTableEnvironment
 
+# target database table 
 def create_events_aggregated_sink(t_env):
     table_name = 'aggregated_green_trips'
     sink_ddl = f"""
@@ -249,7 +250,7 @@ def create_events_aggregated_sink(t_env):
             lpep_dropoff_datetime TIMESTAMP(3),
             PULocationID INT,
             DOLocationID INT,
-            passenger_count INT,
+            passenger_count VARCHAR,
             trip_distance FLOAT,
             tip_amount FLOAT,
             num_hits BIGINT,
@@ -266,6 +267,7 @@ def create_events_aggregated_sink(t_env):
     t_env.execute_sql(sink_ddl)
     return table_name
 
+# events table (source) on redpanda kafka
 def create_events_source_kafka(t_env):
     table_name = "events"
     source_ddl = f"""
@@ -275,7 +277,7 @@ def create_events_source_kafka(t_env):
             lpep_dropoff_datetime TIMESTAMP(3),
             PULocationID INT,
             DOLocationID INT,
-            passenger_count INT,
+            passenger_count VARCHAR,
             trip_distance FLOAT,
             tip_amount FLOAT,
             num_hits BIGINT,
@@ -293,10 +295,11 @@ def create_events_source_kafka(t_env):
     t_env.execute_sql(source_ddl)
     return table_name
 
+# aggregation process from redpanda kafka to database
 def log_aggregation():
     # Set up the execution environment
     env = StreamExecutionEnvironment.get_execution_environment()
-    env.enable_checkpointing(10 * 1000)
+#    env.enable_checkpointing(10 * 1000)
     env.set_parallelism(3)
 
     # Set up the environment settings
@@ -377,10 +380,46 @@ ORDER BY trip_distance DESC
 LIMIT 1;
 ```
 
-| event_hour              | lpep_pickup_datetime | lpep_dropoff_datetime | pulocationid | dolocationid | passenger_count | trip_distance      | tip_amount | num_hits |
-|-------------------------|---------------------|----------------------|--------------|--------------|-----------------|--------------------|------------|----------|
-| 2025-03-17 12:37:04.783 | 2019-10-11 20:34:21 | 2019-10-11 22:40:41  | 126          | 265          | 5               | 95.77999877929688 | 0          |          |
+| event_hour            | lpep_pickup_datetime | lpep_dropoff_datetime | pulocationid | dolocationid | passenger_count | trip_distance    | tip_amount | num_hits |
+|-----------------------|---------------------|----------------------|--------------|--------------|----------------|------------------|------------|----------|
+| 2025-03-18 04:11:35.119 | 2019-10-31 23:23:41 | 2019-11-01 13:01:07 | 129          | 265          | 1              | 515.8900146484375 | 0          |          |
 
-<img width="583" alt="image" src="https://github.com/user-attachments/assets/daa167eb-c542-4a41-b4d1-f1a8cefd32ac" />
 
-<img width="968" alt="image" src="https://github.com/user-attachments/assets/8abe0860-83cf-4dd9-8d56-a4323b3af61e" />
+**Apache Flink Dashboard**
+
+http://localhost:8083/
+
+<img width="1034" alt="image" src="https://github.com/user-attachments/assets/3bbcb487-26d3-48bd-9ff6-ec691978810d" />
+
+Overview
+
+<img width="719" alt="image" src="https://github.com/user-attachments/assets/81fb778c-f487-4990-a1b9-9a6e2dca32fc" />
+
+Exception
+
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/b0f27043-c724-4b43-ab3f-1be67fa676e0" />
+
+Timeline
+
+<img width="980" alt="image" src="https://github.com/user-attachments/assets/28f98982-97a3-447c-84aa-e417c90a7901" />
+
+Checkpoints
+
+<img width="635" alt="image" src="https://github.com/user-attachments/assets/1ddb8daa-8050-4769-bf59-ad03efc56542" />
+
+Configuration
+
+<img width="645" alt="image" src="https://github.com/user-attachments/assets/00d97436-7fe2-4d9a-baa9-d8adc7bd5017" />
+
+
+Tasks Managers
+
+<img width="1033" alt="image" src="https://github.com/user-attachments/assets/264f7373-25f2-4191-98dd-b9df6a681073" />
+
+Job Manager Metrics
+
+<img width="992" alt="image" src="https://github.com/user-attachments/assets/29b2480e-266c-46e4-af49-f4e3454c98e6" />
+
+
+
+
