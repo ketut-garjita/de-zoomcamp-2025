@@ -202,6 +202,23 @@ Now we have the data in the Kafka stream. It's time to process it.
 
 ### Solution
 
+Create aggregated_green_trips table on PostgreSQL
+
+```
+CREATE TABLE aggregated_green_trips (
+        event_hour TIMESTAMP(3),
+        lpep_pickup_datetime TIMESTAMP(3),
+        lpep_dropoff_datetime TIMESTAMP(3),
+        PULocationID INT,
+        DOLocationID INT,
+        passenger_count VARCHAR,
+        trip_distance FLOAT,
+        tip_amount FLOAT,
+        num_hits BIGINT,
+		PRIMARY KEY (event_hour, lpep_dropoff_datetime) 
+);
+```
+
 producer: load_taxi_data.py
 
 ```
@@ -372,6 +389,13 @@ Excute consumer:
 ```
 root@jobmanager:/opt/flink# flink run -py /opt/src/job/session_job.py --pyFiles /opt/src -d
 ```
+Number of rows:
+```
+select count(*) from aggregated_green_trips;
+```
+
+<img width="88" alt="image" src="https://github.com/user-attachments/assets/78aabdf8-7952-4e86-afe0-e16307f5ea86" />
+
 
 Query the highest trip_distance
 ```
