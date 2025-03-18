@@ -72,7 +72,7 @@ Go version:  go1.23.1
 Redpanda Cluster
   node-1  v24.2.18 - f9a22d443087b824803638623d6b7492ec8221f9
 ```
-
+---
 ## Question 2. Creating a topic
 
 Before we can send data to the redpanda server, we need to create a topic. We do it also with the rpk command we used previously for figuring out the version of redpandas.
