@@ -408,6 +408,12 @@ LIMIT 1;
 |-----------------------|---------------------|----------------------|--------------|--------------|----------------|------------------|------------|----------|
 | 2025-03-18 04:11:35.119 | 2019-10-31 23:23:41 | 2019-11-01 13:01:07 | 129          | 265          | 1              | 515.8900146484375 | 0          |          |
 
+The pickup and drop off locations have the longest unbroken streak of taxi trips:
+- lpep_pickup_datetime: 2019-10-31 23:23:41
+- pep_dropoff_datetime: 2019-11-01 13:01:07
+- pulocationid: 129
+- dolocationid: 265
+- trip_distance: 515.90
 
 **Apache Flink Dashboard**
 
